@@ -1,4 +1,4 @@
-package tetris.Modele;
+package Modele.GestionGrilleDeJeu;
 
 /**
  * Représente une dimension

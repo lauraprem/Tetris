@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package tetris.Modele;
+package Modele.JeuDeGrille;
 
 /**
  *
  * @author Corinne
  */
-public class Grille {
+public class JeuDeGrille {
     
 }

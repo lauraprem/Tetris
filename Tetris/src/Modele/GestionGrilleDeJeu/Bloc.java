@@ -1,9 +1,11 @@
-package tetris.Modele;
+package Modele.GestionGrilleDeJeu;
+
+import Modele.GestionGrilleDeJeu.Enums.Couleur;
 
 /**
- * Représente un bloc
+ * Représente une <b>Case d'une Grille</b>
  *
- * @author Corinne
+ * @author Corinne Fagno && Laura Prémillieu
  */
 public class Bloc {
 
@@ -22,7 +24,7 @@ public class Bloc {
      * <b>Constructeur<\b> par defaut
      */
     public Bloc() {
-        this(new Position(0, 0), Couleur.VIDE.val);
+        this(null, Couleur.VIDE.valeur);
     }
 
     /**
@@ -31,7 +33,7 @@ public class Bloc {
      * @param position du Bloc
      */
     public Bloc(Position position) {
-        this(position, Couleur.VIDE.val);
+        this(position, Couleur.VIDE.valeur);
     }
 
     /**

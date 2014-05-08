@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package tetris.Modele;
+package Modele.GestionGrilleDeJeu;
 
 /**
  *
  * @author Corinne
  */
-public class TypePiece {
-    
+public class PieceDeTetris extends PieceDeJeu{
+    //contruire les pièces Tétris
 }

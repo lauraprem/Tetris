@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package tetris.Modele;
+package Modele.GestionGrilleDeJeu.Enums;
 
 /**
  *
  * @author Corinne
  */
-public class Piece {
+public class TypePiece {
     
 }
