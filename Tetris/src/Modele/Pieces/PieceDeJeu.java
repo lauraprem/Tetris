@@ -1,5 +1,6 @@
-package Modele.GestionGrilleDeJeu;
+package Modele.Pieces;
 
+import Modele.GestionGrilleDeJeu.Bloc;
 import java.util.ArrayList;
 
 /**
@@ -8,31 +9,19 @@ import java.util.ArrayList;
  * @author Corinne Fagno && Laura Prémillieu
  */
 public class PieceDeJeu {
-    private Position position;
-    private ArrayList<Bloc> listeBloc;
+    protected ArrayList<Bloc> listeBloc;
 
     public PieceDeJeu() {
         listeBloc = new ArrayList<Bloc>();
         listeBloc.add(new Bloc());
     }
 
-    public PieceDeJeu(Position position) {
-        this.position = position;
-    }
-
-    public PieceDeJeu(Position position, ArrayList<Bloc> listeBloc) {
-        this.position = position;
+    public PieceDeJeu(ArrayList<Bloc> listeBloc) {
         this.listeBloc = listeBloc;
-    }
-
-    
-    public Position getPosition() {
-        return position;
     }
 
     public ArrayList<Bloc> getlisteBlocs() {
         return listeBloc;
     }
-    
     
 }

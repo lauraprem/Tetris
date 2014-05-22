@@ -1,7 +1,5 @@
 package Modele.GestionGrilleDeJeu.Enums;
 
-import Modele.GestionGrille.Enums.*;
-
 /**
  * Représente les couleurs possibles
  *

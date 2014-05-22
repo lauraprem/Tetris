@@ -1,6 +1,7 @@
 package Modele.GestionGrilleDeJeu;
 
 import Modele.GestionGrilleDeJeu.Enums.Couleur;
+import java.awt.Color;
 
 /**
  * Représente une <b>Case d'une Grille</b>
@@ -34,6 +35,10 @@ public class Bloc {
      */
     public Bloc(Position position) {
         this(position, Couleur.VIDE.valeur);
+    }
+    
+    public Bloc(int x, int y, Color c) {
+       // this(new Position(x,y), c);
     }
 
     /**
