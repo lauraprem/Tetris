@@ -2,6 +2,7 @@ package Modele.Pieces;
 
 import Modele.Bloc;
 import Modele.Bloc;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,13 @@ public class PieceDeJeu {
     }
     
     public void setlisteBlocs(ArrayList<Bloc> listeBloc) {
-        this.listeBloc = listeBloc;
+        this.listeBloc.removeAll(this.listeBloc);
+        
+        for(int i =0;i<listeBloc.size();i++){
+            Bloc bloc = new Bloc();
+            bloc.setBloc(listeBloc.get(i).getPosition(), listeBloc.get(i).getCouleur());
+            this.listeBloc.add(bloc);
+        }
     }
     
 }

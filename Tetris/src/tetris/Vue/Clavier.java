@@ -27,7 +27,7 @@ public class Clavier implements KeyListener
     {
         System.out.println("Code touche pressée : " + event.getKeyCode()
                 + " - caractère touche pressée : " + event.getKeyChar());
-        tetris.gestionEnPause();
+ 
         
     }
 
@@ -37,6 +37,19 @@ public class Clavier implements KeyListener
         
         System.out.println("Code touche relâchée : " + event.getKeyCode()
                 + " - caractère touche relâchée : " + event.getKeyChar());
+               if (event.getKeyCode()== 32)
+        {
+            tetris.gestionEnPause();
+        }
+        if (event.getKeyChar() == 'q')
+        {
+            tetris.DeplacerPiece(event.getKeyCode());
+        }
+        if (event.getKeyChar() == 'd')
+        {
+            tetris.DeplacerPiece(event.getKeyCode());
+            
+        }
     }
 
     @Override

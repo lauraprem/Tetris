@@ -7,7 +7,8 @@ import java.awt.Color;
  *
  * @author Corinne Fagno && Laura Prémillieu
  */
-public class Bloc {
+public class Bloc
+{
 
     /**
      * position du Bloc
@@ -23,7 +24,8 @@ public class Bloc {
     /**
      * <b>Constructeur<\b> par defaut
      */
-    public Bloc() {
+    public Bloc()
+    {
         this(null, Color.GRAY);
     }
 
@@ -32,12 +34,14 @@ public class Bloc {
      *
      * @param position du Bloc
      */
-    public Bloc(Position position) {
+    public Bloc(Position position)
+    {
         this(position, null);
     }
-    
-    public Bloc(int x, int y, Color c) {
-        this(new Position(x,y), c);
+
+    public Bloc(int x, int y, Color c)
+    {
+        this(new Position(x, y), c);
     }
 
     /**
@@ -46,26 +50,40 @@ public class Bloc {
      * @param position du Bloc
      * @param couleur du bloc
      */
-    public Bloc(Position position, Color couleur) {
+    public Bloc(Position position, Color couleur)
+    {
         this.position = position;
         this.couleur = couleur;
     }
 
     // ACCESSEURS
-    public Position getPosition() {
+    public Position getPosition()
+    {
         return position;
     }
 
-    public Color getCouleur() {
+    public Color getCouleur()
+    {
         return couleur;
     }
 
     // MUTATEURS
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPosition(Position position)
+    {
+        this.position.setPosition(position.getX(), position.getY());
     }
 
-    public void setCouleur(Color couleur) {
+    public void setCouleur(Color couleur)
+    {
+        this.couleur = couleur;
+    }
+
+    public void setBloc(Position position, Color couleur)
+    {
+        if (position != null)
+        {
+            this.position = new Position(position.getX(), position.getY());
+        }
         this.couleur = couleur;
     }
 }

@@ -3,6 +3,7 @@ package Modele.GestionJeuDeTetris;
 import Modele.Bloc;
 import Modele.Pieces.PieceDeTetris;
 import Modele.Pieces.PieceTetris.PieceI;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
@@ -213,15 +214,20 @@ public class JeuDeTetris extends Observable implements Runnable
      */
     public boolean VerifCollision(ArrayList<Bloc> fantome)
     {
+        
+        for (int j = 0; j < fantome.size(); j++)
+        {
+            if (fantome.get(j).getPosition().getX() == hauteur)
+            {
+                return true;
+            }
+        }
         for (int i = 0; i < blocEnJeu.size(); i++)
         {
-            for (int j = 0; i < fantome.size(); j++)
+            for (int j = 0; j < fantome.size(); j++)
             {
-                if (blocEnJeu.get(i).getPosition() == fantome.get(j).getPosition())
-                {
-                    return true;
-                }
-                if (fantome.get(j).getPosition().getX() == hauteur - 1)
+                if (blocEnJeu.get(i).getPosition().getX()==(fantome.get(j).getPosition()).getX() &&
+                    blocEnJeu.get(i).getPosition().getY()==(fantome.get(j).getPosition()).getY()  )
                 {
                     return true;
                 }
@@ -239,7 +245,13 @@ public class JeuDeTetris extends Observable implements Runnable
      */
     public boolean DeplacerPiece(int sens)
     {
-        ArrayList<Bloc> fantome = new ArrayList<>(pieceCourante.getlisteBlocs());
+        ArrayList<Bloc> fantome = new ArrayList<>();
+        for (int i=0; i< pieceCourante.getlisteBlocs().size();i++)
+        {
+            Bloc b = new Bloc();
+            b.setBloc(pieceCourante.getlisteBlocs().get(i).getPosition(), pieceCourante.getlisteBlocs().get(i).getCouleur());
+            fantome.add(b);
+        }
         // déplacement à gauche
         if (sens == 81)
         {
@@ -287,16 +299,16 @@ public class JeuDeTetris extends Observable implements Runnable
         int d = 0;
         for (int i = 0; i < blocEnJeu.size(); i++)
         {
-            if (pieceCourante.getlisteBlocs().get(0).getPosition().getY() == blocEnJeu.get(i).getPosition().getY())
+            if (pieceCourante.getlisteBlocs().get(0).getPosition().getX() == blocEnJeu.get(i).getPosition().getX())
             {
                 a++;
-            } else if (pieceCourante.getlisteBlocs().get(1).getPosition().getY() == blocEnJeu.get(i).getPosition().getY())
+            } else if (pieceCourante.getlisteBlocs().get(1).getPosition().getX() == blocEnJeu.get(i).getPosition().getX())
             {
                 b++;
-            } else if (pieceCourante.getlisteBlocs().get(2).getPosition().getY() == blocEnJeu.get(i).getPosition().getY())
+            } else if (pieceCourante.getlisteBlocs().get(2).getPosition().getX() == blocEnJeu.get(i).getPosition().getX())
             {
                 c++;
-            } else if (pieceCourante.getlisteBlocs().get(3).getPosition().getY() == blocEnJeu.get(i).getPosition().getY())
+            } else if (pieceCourante.getlisteBlocs().get(3).getPosition().getX() == blocEnJeu.get(i).getPosition().getX())
             {
                 d++;
             }
@@ -304,16 +316,16 @@ public class JeuDeTetris extends Observable implements Runnable
 
         if (a == largeur - 1)
         {
-            return pieceCourante.getlisteBlocs().get(0).getPosition().getY();
+            return pieceCourante.getlisteBlocs().get(0).getPosition().getX();
         } else if (b == largeur - 1)
         {
-            return pieceCourante.getlisteBlocs().get(1).getPosition().getY();
+            return pieceCourante.getlisteBlocs().get(1).getPosition().getX();
         } else if (c == largeur - 1)
         {
-            return pieceCourante.getlisteBlocs().get(2).getPosition().getY();
+            return pieceCourante.getlisteBlocs().get(2).getPosition().getX();
         } else if (d == largeur - 1)
         {
-            return pieceCourante.getlisteBlocs().get(3).getPosition().getY();
+            return pieceCourante.getlisteBlocs().get(3).getPosition().getX();
         }
 
         return -1;
@@ -372,9 +384,18 @@ public class JeuDeTetris extends Observable implements Runnable
     @Override
     public void run()
     {
+        setChanged();
+        notifyObservers();
+        try
+        {
+            Thread.currentThread().sleep(1000);
+        } catch (InterruptedException ex)
+        {
+            Logger.getLogger(JeuDeTetris.class.getName()).log(Level.SEVERE, null, ex);
+        }
         while (true)
         {
-
+            
             BougerPiece(-1);
             setChanged();
             notifyObservers();
@@ -410,7 +431,5 @@ public class JeuDeTetris extends Observable implements Runnable
         }
 
     }
-
-
 
 }
