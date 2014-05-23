@@ -1,7 +1,5 @@
 package Modele;
 
-import Modele.Position;
-import Modele.GestionGrilleDeJeu.Enums.Couleur;
 import java.awt.Color;
 
 /**
@@ -19,14 +17,14 @@ public class Bloc {
     /**
      * couleur du Bloc
      */
-    private int couleur;
+    private Color couleur;
 
     // CONSTRUCTEURS
     /**
      * <b>Constructeur<\b> par defaut
      */
     public Bloc() {
-        this(null, Couleur.VIDE.valeur);
+        this(null, Color.GRAY);
     }
 
     /**
@@ -35,11 +33,11 @@ public class Bloc {
      * @param position du Bloc
      */
     public Bloc(Position position) {
-        this(position, Couleur.VIDE.valeur);
+        this(position, null);
     }
     
     public Bloc(int x, int y, Color c) {
-       // this(new Position(x,y), c);
+        this(new Position(x,y), c);
     }
 
     /**
@@ -48,7 +46,7 @@ public class Bloc {
      * @param position du Bloc
      * @param couleur du bloc
      */
-    public Bloc(Position position, int couleur) {
+    public Bloc(Position position, Color couleur) {
         this.position = position;
         this.couleur = couleur;
     }
@@ -58,7 +56,7 @@ public class Bloc {
         return position;
     }
 
-    public int getCouleur() {
+    public Color getCouleur() {
         return couleur;
     }
 
@@ -67,7 +65,7 @@ public class Bloc {
         this.position = position;
     }
 
-    public void setCouleur(int couleur) {
+    public void setCouleur(Color couleur) {
         this.couleur = couleur;
     }
 }

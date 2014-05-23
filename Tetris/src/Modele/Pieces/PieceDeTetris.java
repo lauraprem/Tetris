@@ -5,10 +5,8 @@
  */
 package Modele.Pieces;
 
-import Modele.Bloc;
 import Modele.Position;
 import java.awt.Color;
-import java.util.ArrayList;
 
 /**
  *
@@ -19,7 +17,9 @@ public abstract class PieceDeTetris extends PieceDeJeu {
     protected Color couleurDefaut;
     
     public PieceDeTetris(int largeur){ // position centre rotation ???
-        centreRotation.setPosition(1, largeur/2);
+        super();
+        centreRotation = new Position(1, largeur/2);
+        
     }
     
     public abstract Color getCouleurDefaut();
