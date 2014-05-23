@@ -1,6 +1,7 @@
 package Modele.Pieces;
 
-import Modele.GestionGrilleDeJeu.Bloc;
+import Modele.Bloc;
+import Modele.Bloc;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +14,6 @@ public class PieceDeJeu {
 
     public PieceDeJeu() {
         listeBloc = new ArrayList<Bloc>();
-        listeBloc.add(new Bloc());
     }
 
     public PieceDeJeu(ArrayList<Bloc> listeBloc) {
@@ -22,6 +22,10 @@ public class PieceDeJeu {
 
     public ArrayList<Bloc> getlisteBlocs() {
         return listeBloc;
+    }
+    
+    public void setlisteBlocs(ArrayList<Bloc> listeBloc) {
+        this.listeBloc = listeBloc;
     }
     
 }

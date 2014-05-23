@@ -1,5 +1,6 @@
-package Modele.GestionGrilleDeJeu;
+package Modele;
 
+import Modele.Position;
 import Modele.GestionGrilleDeJeu.Enums.Couleur;
 import java.awt.Color;
 

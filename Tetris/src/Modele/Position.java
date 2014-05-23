@@ -1,4 +1,4 @@
-package Modele.GestionGrilleDeJeu;
+package Modele;
 
 /**
  * Représente une dimension
@@ -54,7 +54,7 @@ public class Position {
         this.y = y;
     }
     
-    public void setXY(int x, int y) {
+    public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
     }

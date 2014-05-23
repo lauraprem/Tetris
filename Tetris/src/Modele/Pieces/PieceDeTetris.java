@@ -5,30 +5,22 @@
  */
 package Modele.Pieces;
 
-import Modele.GestionGrilleDeJeu.Bloc;
-import Modele.GestionGrilleDeJeu.Position;
+import Modele.Bloc;
+import Modele.Position;
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
  * @author Corinne
  */
-public class PieceDeTetris extends PieceDeJeu {
-    protected Position axeRotation;
-
-    public PieceDeTetris() {
+public abstract class PieceDeTetris extends PieceDeJeu {
+    protected Position centreRotation;
+    protected Color couleurDefaut;
+    
+    public PieceDeTetris(int largeur){ // position centre rotation ???
+        centreRotation.setPosition(1, largeur/2);
     }
     
-    public void setPosition(Position axeRotation){
-        this.axeRotation = axeRotation;
-    }
-
-    public Color getColor() {
-        return Color.WHITE;
-    }
-    public void setColor() {
-    }
-    public Color getColorDefault() {
-        return Color.blue;
-    }
+    public abstract Color getCouleurDefaut();
 }
