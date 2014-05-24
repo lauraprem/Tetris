@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Modele.Score;
+package tetris.Modele.Score;
 
 /**
  *

@@ -1,7 +1,5 @@
-package Modele.Pieces;
+package tetris.Modele.Pieces;
 
-import Modele.Bloc;
-import Modele.Bloc;
 import java.awt.Color;
 import java.util.ArrayList;
 

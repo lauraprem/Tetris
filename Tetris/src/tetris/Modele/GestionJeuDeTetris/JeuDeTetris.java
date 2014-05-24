@@ -1,8 +1,8 @@
-package Modele.GestionJeuDeTetris;
+package tetris.Modele.GestionJeuDeTetris;
 
-import Modele.Bloc;
-import Modele.Pieces.PieceDeTetris;
-import Modele.Pieces.PieceTetris.PieceI;
+import tetris.Modele.Pieces.Bloc;
+import tetris.Modele.Pieces.PieceDeTetris;
+import tetris.Modele.Pieces.PieceTetris.PieceI;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;

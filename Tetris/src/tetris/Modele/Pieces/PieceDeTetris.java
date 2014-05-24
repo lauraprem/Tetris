@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modele.Pieces;
+package tetris.Modele.Pieces;
 
-import Modele.Position;
 import java.awt.Color;
 
 /**

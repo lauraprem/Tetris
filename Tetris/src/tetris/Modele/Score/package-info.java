@@ -1,4 +1,4 @@
 /**
  * Gestion de score
  */
-package Modele.Score;
+package tetris.Modele.Score;

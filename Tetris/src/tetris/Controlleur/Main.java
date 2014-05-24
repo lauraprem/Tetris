@@ -1,11 +1,11 @@
-package Executable;
+package tetris.Controlleur;
 
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import Modele.GestionJeuDeTetris.JeuDeTetris;
-import Modele.GestionnaireTetris;
+import tetris.Modele.GestionJeuDeTetris.JeuDeTetris;
+import tetris.Modele.GestionnaireTetris;
 import javax.swing.SwingUtilities;
 import tetris.Vue.FenetreJeu;
 

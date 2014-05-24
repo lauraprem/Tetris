@@ -1,4 +1,4 @@
 /**
  * Modele du jeu
  */
-package Modele;
+package tetris.Modele;

@@ -5,7 +5,8 @@
  */
 package tetris.Vue;
 
-import Modele.GestionJeuDeTetris.JeuDeTetris;
+import tetris.Controlleur.ControlleurClavier;
+import tetris.Modele.GestionJeuDeTetris.JeuDeTetris;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -134,7 +135,7 @@ public class FenetreJeu extends JFrame implements Observer
         principalPanel.add(piecePanel, BorderLayout.LINE_END);
 
         principalPanel.setFocusable(true);
-        principalPanel.addKeyListener(new Clavier(tetris));
+        principalPanel.addKeyListener(new ControlleurClavier(tetris));
 
     }
 

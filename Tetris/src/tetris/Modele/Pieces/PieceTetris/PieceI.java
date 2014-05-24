@@ -1,7 +1,7 @@
-package Modele.Pieces.PieceTetris;
+package tetris.Modele.Pieces.PieceTetris;
 
-import Modele.Bloc;
-import Modele.Pieces.PieceDeTetris;
+import tetris.Modele.Pieces.Bloc;
+import tetris.Modele.Pieces.PieceDeTetris;
 import java.awt.Color;
 
 public class PieceI extends PieceDeTetris {
