@@ -1,16 +1,16 @@
 package tetris.Modele.Pieces.PieceTetris;
 
+import java.awt.Color;
 import tetris.Modele.Pieces.Bloc;
 import tetris.Modele.Pieces.PieceDeTetris;
-import java.awt.Color;
 import tetris.Modele.Pieces.Position;
 
 /**
- * Représente la <b>Piece de Tetris I</b>
+ * Représente la <b>Piece de Tetris J</b>
  *
  * @author Corinne Fagno && Laura Prémillieu
  */
-public class PieceI extends PieceDeTetris {
+public class PieceJ extends PieceDeTetris {
     // CONSTRUCTEUR
     /**
      * <b>Constructeur<\b> en fonction de la taille d'un repère, cela permet que
@@ -21,19 +21,21 @@ public class PieceI extends PieceDeTetris {
      * @param hauteur taille maximum de l'ordonnées
      * @see Bloc
      */
-    public PieceI(int largeur, int hauteur) {
+    public PieceJ(int largeur, int hauteur) {
         super(largeur, hauteur);
 
         // positionnement du centre de rotation sur le repere
         Position p = new Position(0, largeur / 2);
 
         // Indication de l'index du bloc de rotation
-        numBlocRotation = 1;
+        numBlocRotation = 3;
 
-        // Fabrication des Bloc de la piece I
-        for (int i = 0; i < 4; i++) {
-            listeBloc.add(new Bloc(p.getX(), p.getY() + (i - 1), getCouleurDefaut()));
-        }
+        // Fabrication des Bloc de la piece J
+        listeBloc.add(new Bloc(p.getX(), p.getY() - 2, getCouleurDefaut()));
+        listeBloc.add(new Bloc(p.getX(), p.getY() - 1, getCouleurDefaut()));
+        listeBloc.add(new Bloc(p.getX(), p.getY(), getCouleurDefaut()));
+        listeBloc.add(new Bloc(p.getX() + 1, p.getY(), getCouleurDefaut()));
+
     }
 
     // METHODE
@@ -41,10 +43,9 @@ public class PieceI extends PieceDeTetris {
      * <b>Méthode<\b> permettant de retourner la couleur originale de la piece
      *
      * @return couleur originale de la pièce
-     *
      */
     @Override
     public final Color getCouleurDefaut() {
-        return Color.CYAN;
+        return Color.BLUE;
     }
 }

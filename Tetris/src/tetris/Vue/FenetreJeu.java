@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tetris.Vue;
 
-import tetris.Controlleur.ControlleurClavier;
-import tetris.Modele.GestionJeuDeTetris.JeuDeTetris;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,6 +16,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import tetris.Modele.JeuDeTetris;
 
 /**
  *
@@ -38,6 +32,7 @@ public class FenetreJeu extends JFrame implements Observer
     
     JPanel[][] cases ;
     JeuDeTetris tetris;
+    JPanel principalPanel;
 
     public FenetreJeu(JeuDeTetris t)
     {
@@ -66,7 +61,7 @@ public class FenetreJeu extends JFrame implements Observer
 
         //Panel principal
         Border magentaline = BorderFactory.createLineBorder(Color.MAGENTA, 1);
-        JPanel principalPanel = new JPanel(new BorderLayout());
+        principalPanel = new JPanel(new BorderLayout());
         principalPanel.setBackground(Color.BLACK);
         this.add(principalPanel, BorderLayout.CENTER);
 
@@ -135,8 +130,12 @@ public class FenetreJeu extends JFrame implements Observer
         principalPanel.add(piecePanel, BorderLayout.LINE_END);
 
         principalPanel.setFocusable(true);
-        principalPanel.addKeyListener(new ControlleurClavier(tetris));
+        //principalPanel.addKeyListener(new ControlleurClavier(tetris));
 
+    }
+    
+    public JPanel getPrincipalPanel() {
+        return principalPanel;
     }
 
     @Override
