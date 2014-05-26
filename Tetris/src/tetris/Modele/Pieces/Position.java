@@ -72,4 +72,21 @@ public class Position implements Cloneable {
         this.x = x;
         this.y = y;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        // Vérification du type du paramètre
+        if (o instanceof Position) {
+            // Vérification des valeurs des attributs
+            Position other = (Position) o;
+
+            // Pour les attributs de type primitif
+            // on compare directement les valeurs :
+            if ((this.x != other.x) || (this.y != other.y)) {
+                return false; // les attributs sont différents
+            }
+            return true;
+        }
+        return false;
+    }
 }

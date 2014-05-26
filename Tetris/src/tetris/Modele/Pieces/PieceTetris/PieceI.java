@@ -25,6 +25,7 @@ public class PieceI extends PieceDeTetris {
         super(largeur, hauteur);
 
         // positionnement du centre de rotation sur le repere
+        //Position p = new Position(0, largeur / 2);
         Position p = new Position(0, largeur / 2);
 
         // Indication de l'index du bloc de rotation
@@ -32,7 +33,11 @@ public class PieceI extends PieceDeTetris {
 
         // Fabrication des Bloc de la piece I
         for (int i = 0; i < 4; i++) {
-            listeBloc.add(new Bloc(p.getX(), p.getY() + (i - 1), getCouleurDefaut()));
+            Bloc b = new Bloc(p.getX(), p.getY() + (i - 1), getCouleurDefaut());
+            /*if(i==1)
+                posRotation = b.getPosition();*/
+            
+            listeBloc.add(b);
         }
     }
 
@@ -46,5 +51,11 @@ public class PieceI extends PieceDeTetris {
     @Override
     public final Color getCouleurDefaut() {
         return Color.CYAN;
+    }
+    
+    @Override
+    public void deplacerBas(int pasDep) {
+        super.deplacerBas(pasDep);
+            //posRotation = listeBloc.get(numBlocRotation).getPosition();
     }
 }

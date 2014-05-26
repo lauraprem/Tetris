@@ -28,13 +28,14 @@ public class PieceL extends PieceDeTetris {
         Position p = new Position(0, largeur / 2);
 
         // Indication de l'index du bloc de rotation
-        numBlocRotation = 3;
-
+        numBlocRotation = 1;
         // Fabrication des Bloc de la piece L
         listeBloc.add(new Bloc(p.getX(), p.getY(), getCouleurDefaut()));
         listeBloc.add(new Bloc(p.getX(), p.getY() + 1, getCouleurDefaut()));
         listeBloc.add(new Bloc(p.getX(), p.getY() + 2, getCouleurDefaut()));
         listeBloc.add(new Bloc(p.getX() + 1, p.getY(), getCouleurDefaut()));
+
+        //posRotation = new Position(p.getX(), p.getY() + 1);// enlever
     }
 
     // METHODE
@@ -48,4 +49,9 @@ public class PieceL extends PieceDeTetris {
         return Color.ORANGE;
     }
 
+    @Override
+    public void deplacerBas(int pasDep) {
+        super.deplacerBas(pasDep);
+        //posRotation = listeBloc.get(numBlocRotation).getPosition();
+    }
 }

@@ -8,7 +8,9 @@ import java.awt.Color;
  * @author Corinne Fagno && Laura Prémillieu
  */
 public class PieceDeTetris extends PieceDeJeu implements Cloneable {
+
     // ATTRIBUTS
+    //protected Position posRotation;
     /**
      * correspond au numéro de l'index du Bloc qui permet la rotation de la
      * piece
@@ -35,6 +37,7 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
     public PieceDeTetris(int largeur, int hauteur) {
         super();
         numBlocRotation = 0;
+        //posRotation = null;
     }
 
     /**
@@ -47,6 +50,7 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
         try {
             PieceDeTetris p = (PieceDeTetris) super.clone();
             p.numBlocRotation = this.numBlocRotation;
+            //p.posRotation = (Position) this.posRotation.clone();
             return p;
         } catch (CloneNotSupportedException ex) {
             System.out.println("Erreur clonage profondeur PieceDeTetris :" + ex.getMessage());
@@ -83,13 +87,13 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
         if (numBlocRotation != -1 && listeBloc != null) { // s'il existe un point de rotation
             // cas avant centre
             for (int i = 0; i < listeBloc.size(); i++) {
-                if (i != numBlocRotation) {
+                if (!listeBloc.get(numBlocRotation).equals(listeBloc.get(i))) {
                     int x = listeBloc.get(i).getPosition().getX();
                     int y = listeBloc.get(i).getPosition().getY();
-                    int deltax = listeBloc.get(1).getPosition().getX() - x;
-                    int deltay = listeBloc.get(1).getPosition().getY() - y;
-                    int deltaLarg = Math.abs(20 - (20 - listeBloc.get(1).getPosition().getX()));
-                    int deltaLong = Math.abs(10 - (10 - listeBloc.get(1).getPosition().getY()));
+                    int deltax = listeBloc.get(numBlocRotation).getX() - x;
+                    int deltay = listeBloc.get(numBlocRotation).getY() - y;
+                    int deltaLarg = Math.abs(20 - (20 - listeBloc.get(numBlocRotation).getX()));
+                    int deltaLong = Math.abs(10 - (10 - listeBloc.get(numBlocRotation).getY()));
 
                     /*if (x < listeBloc.get(numBlocRotation).getPosition().getX() || y > listeBloc.get(numBlocRotation).getPosition().getY()) {
                      degre = degre * (-1);

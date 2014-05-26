@@ -18,7 +18,10 @@ import tetris.Modele.Pieces.Position;
  */
 public class JeuDeTetris extends Observable implements Runnable {
 
-    // ATTRIBUTS   
+    // ATTRIBUTS
+    /**
+     * Pas de temps de la chute des blocs
+     */
     private static int pasTemps;
     /**
      * Nombre de lignes de la Grille
@@ -55,7 +58,7 @@ public class JeuDeTetris extends Observable implements Runnable {
      * permet de savoir si le jeu est en accéléré
      */
     private boolean accelerer;
-    
+
     /**
      * permet de savoir si la partie est terminé
      */
@@ -115,10 +118,6 @@ public class JeuDeTetris extends Observable implements Runnable {
 
     public ArrayList<PieceDeTetris> getPiecesSuivantes() {
         return piecesSuivantes;
-    }
-
-    public static int getPasTemps() {
-        return pasTemps;
     }
 
     public PieceDeTetris getPieceCourante() {
@@ -273,12 +272,13 @@ public class JeuDeTetris extends Observable implements Runnable {
      * -1 pour en bas
      * @return vrai si la pièce a pu etre déplacée et faux sinon
      */
-    public boolean deplacerPiece(int sens) {
-        //if (mep == false) {
+    public synchronized boolean deplacerPiece(int sens) {
+       // if (mep == false) {//verif
             // cree un fantome pour verifier les position possibles de la piece
             PieceDeTetris fantome;
-            synchronized(this){
-            fantome = (PieceDeTetris) pieceCourante.clone();}
+            //synchronized(this){
+            fantome = (PieceDeTetris) pieceCourante.clone();
+           // }
 
             // Recherche de l'action futur à réaliser
             switch (sens) {
@@ -301,16 +301,17 @@ public class JeuDeTetris extends Observable implements Runnable {
 
             // Verification de la colision
             if (!verifCollision(fantome.getlisteBlocs())) {
-                synchronized (this) {
-                    pieceCourante = fantome;
-                }
+                //  synchronized (this) {
+                pieceCourante = fantome;
+                //  }
                 // indication de la modification à la vue
                 setChanged();
                 notifyObservers();
-                return true;
-          //  }
 
-        }
+                return true;
+            }
+
+     //   }
         return false;
     }
 
@@ -393,15 +394,15 @@ public class JeuDeTetris extends Observable implements Runnable {
                 supprimerLigne(ligne);
             }
             passerPieceSuivante();
-            
+
             // Verifie si la partie est perdu
-            if(verifCollision(pieceCourante.getlisteBlocs())){
+            if (verifCollision(pieceCourante.getlisteBlocs())) {
                 termine = true;
                 setChanged();
                 notifyObservers();
                 mep = true;
             }
-                
+
         }
     }
 
@@ -415,12 +416,10 @@ public class JeuDeTetris extends Observable implements Runnable {
             while (true) {
 
                 bougerPiece(-1);
-                setChanged();
-                notifyObservers();
 
-                Thread.currentThread().sleep(pasTemps);
+                Thread.currentThread().sleep(getPasTemps());
 
-                if (mep) {
+                while (isPause()) {//eviter que le thread soit réveillé par autre chose
                     synchronized (this) {
                         wait();
                     }
@@ -432,31 +431,46 @@ public class JeuDeTetris extends Observable implements Runnable {
     }
 
     /**
-     * Permet de gérer la vitesse des temps d'attentes du jeu
+     * Permet d'accélérer la vitesse de la chute des blocs
      */
-    public void gestionVitesse() {
-        if (mep != true) {
-            if (accelerer == false) {
-                pasTemps = pasTemps / 4;
-                accelerer = true;
-            } else {
-                pasTemps = pasTemps * 4;
-                accelerer = false;
-            }
+    public synchronized void decelerer() {
+        if (mep != true && accelerer == true) {
+            pasTemps = pasTemps * 8;
+            accelerer = false;
         }
+    }
+    
+    /**
+     * Permet de ralentir la vitesse de la chute des blocs
+     */
+    public synchronized void accelerer() {
+        if (accelerer == false && mep != true) {
+            pasTemps = pasTemps / 8;
+            accelerer = true;
+        }
+    }
+
+    public synchronized int getPasTemps() {
+        return pasTemps;
     }
 
     /**
      * Permet la pause lors du jeu
      */
     public void gestionEnPause() {
-        if (mep == true) {
-            mep = false;
-            synchronized (this) {
+        synchronized (this) {
+            if (mep == true) {
+                mep = false;
+                // synchronized (this) {
                 notify();
+                //}
+            } else {
+                mep = true;
             }
-        } else {
-            mep = true;
         }
+    }
+
+    public synchronized boolean isPause() { // pas changer pendant les if (type primitif)
+        return mep;
     }
 }
