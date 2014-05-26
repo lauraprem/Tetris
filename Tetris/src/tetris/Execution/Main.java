@@ -3,6 +3,7 @@ package tetris.Execution;
 import tetris.Modele.JeuDeTetris;
 import javax.swing.SwingUtilities;
 import tetris.Controleur.ControleurPrincipale;
+import tetris.Vue.FenetreAccueil;
 import tetris.Vue.FenetreJeu;
 
 /**
@@ -18,8 +19,10 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JeuDeTetris modele = new JeuDeTetris();
-                FenetreJeu vue = new FenetreJeu(modele);
-                ControleurPrincipale controlleur = new ControleurPrincipale(modele, vue);
+                FenetreAccueil vue = new FenetreAccueil(modele); 
+ vue.setVisible(true);
+//FenetreJeu(modele);
+               
             }
         });
     }
