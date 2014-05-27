@@ -11,6 +11,12 @@ import tetris.Modele.Pieces.Position;
  * @author Corinne Fagno && Laura Prémillieu
  */
 public class PieceI extends PieceDeTetris {
+    //ATTRIBUT
+    /**
+     * indique si la barre est horizontal
+     */
+    protected boolean horizontal;
+
     // CONSTRUCTEUR
     /**
      * <b>Constructeur<\b> en fonction de la taille d'un repère, cela permet que
@@ -25,20 +31,16 @@ public class PieceI extends PieceDeTetris {
         super(largeur, hauteur);
 
         // positionnement du centre de rotation sur le repere
-        //Position p = new Position(0, largeur / 2);
-        Position p = new Position(0, largeur / 2);
+        Position p = new Position(0, this.largeur / 2);
 
         // Indication de l'index du bloc de rotation
         numBlocRotation = 1;
 
         // Fabrication des Bloc de la piece I
         for (int i = 0; i < 4; i++) {
-            Bloc b = new Bloc(p.getX(), p.getY() + (i - 1), getCouleurDefaut());
-            /*if(i==1)
-                posRotation = b.getPosition();*/
-            
-            listeBloc.add(b);
+            listeBloc.add(new Bloc(p.getX(), p.getY() + (i - 1), getCouleurDefaut()));
         }
+        horizontal = true;
     }
 
     // METHODE
@@ -52,10 +54,34 @@ public class PieceI extends PieceDeTetris {
     public final Color getCouleurDefaut() {
         return Color.CYAN;
     }
-    
+
+    /**
+     * <b>Méthode<\b> permettant de tourner la piece I. Il n'y a que deux
+     * positions possible, une horizontale et une vertical
+     *
+     * @param degre est un entier qui correspond au degré de rotation
+     */
     @Override
-    public void deplacerBas(int pasDep) {
-        super.deplacerBas(pasDep);
-            //posRotation = listeBloc.get(numBlocRotation).getPosition();
+    public void rotationPiece(int degre) {
+        super.rotationPiece(degrePieceTourne(degre));
     }
+
+    /**
+     * <b>Méthode<\b> permet de connaitre le degre de rotation pour que la piece
+     * n'est que deux mouvement de rotation possible
+     *
+     * @param degre de rotation de la piece
+     * @return couleur originale de la pièce
+     *
+     */
+    private int degrePieceTourne(int degre) {
+        if (horizontal == true) {
+            horizontal = false;
+            return (-Math.abs(degre));
+        } else {
+            horizontal = true;
+            return Math.abs(degre);
+        }
+    }
+
 }
