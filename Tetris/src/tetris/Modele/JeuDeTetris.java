@@ -366,6 +366,8 @@ public class JeuDeTetris extends Observable implements Runnable
 
         fantome = (PieceDeTetris) pieceCourante.clone();
 
+        
+        
         // Recherche de l'action futur à réaliser
         switch (sens)
         {
@@ -532,7 +534,6 @@ public class JeuDeTetris extends Observable implements Runnable
             {
 
                 bougerPiece(-1);
-                System.out.println(score.toString());
                 setChanged();
                 notifyObservers();
                 Thread.currentThread().sleep(getPasTemps());
