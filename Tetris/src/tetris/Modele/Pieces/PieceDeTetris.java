@@ -1,6 +1,7 @@
 package tetris.Modele.Pieces;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  * Représente une <b>Piece de Tetris</b>
@@ -10,13 +11,18 @@ import java.awt.Color;
 public class PieceDeTetris extends PieceDeJeu implements Cloneable {
 
     // ATTRIBUTS
-    //protected Position posRotation;
     /**
      * correspond au numéro de l'index du Bloc qui permet la rotation de la
      * piece
      */
     protected int numBlocRotation;
-
+    
+    /**
+     * 
+     */
+    protected int hauteur;
+    protected int largeur;
+    
     // CONSTRUCTEURS
     /**
      * <b>Constructeur<\b> par defaut
@@ -37,7 +43,8 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
     public PieceDeTetris(int largeur, int hauteur) {
         super();
         numBlocRotation = 0;
-        //posRotation = null;
+        this.hauteur = hauteur;
+        this.largeur = largeur;
     }
 
     /**
@@ -50,7 +57,6 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
         try {
             PieceDeTetris p = (PieceDeTetris) super.clone();
             p.numBlocRotation = this.numBlocRotation;
-            //p.posRotation = (Position) this.posRotation.clone();
             return p;
         } catch (CloneNotSupportedException ex) {
             System.out.println("Erreur clonage profondeur PieceDeTetris :" + ex.getMessage());
@@ -83,7 +89,8 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
      *
      * @param degre est un entier qui correspond au degré de rotation
      */
-    public void rotationPiece(int degre) { // peut mettre degre en parametre
+    public void rotationPiece(int degre) {
+        // Rotation de la piece
         if (numBlocRotation != -1 && listeBloc != null) { // s'il existe un point de rotation
             // cas avant centre
             for (int i = 0; i < listeBloc.size(); i++) {
@@ -92,21 +99,55 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
                     int y = listeBloc.get(i).getPosition().getY();
                     int deltax = listeBloc.get(numBlocRotation).getX() - x;
                     int deltay = listeBloc.get(numBlocRotation).getY() - y;
-                    int deltaLarg = Math.abs(20 - (20 - listeBloc.get(numBlocRotation).getX()));
-                    int deltaLong = Math.abs(10 - (10 - listeBloc.get(numBlocRotation).getY()));
+                    int deltaLarg = Math.abs(largeur - (largeur - listeBloc.get(numBlocRotation).getX()));
+                    int deltaLong = Math.abs(hauteur - (hauteur - listeBloc.get(numBlocRotation).getY()));
 
-                    /*if (x < listeBloc.get(numBlocRotation).getPosition().getX() || y > listeBloc.get(numBlocRotation).getPosition().getY()) {
-                     degre = degre * (-1);
-                     }else{*/
-                    // }
                     Position p = new Position(deltax * ((int) Math.round(Math.cos(degre))) - deltay * ((int) Math.round(Math.sin(degre))) + deltaLarg,
                             deltax * ((int) Math.round(Math.sin(degre))) + deltay * ((int) Math.round(Math.cos(degre))) + deltaLong);
 
                     listeBloc.get(i).setPosition(p);
                 }
             }
-        } else {
-            // inverser les lignes avec les collonnes
         }
+    }
+    
+    /**
+     *  <b>Méthode<\b> place la pièce la plus haute à gauche en x = 0 et y = 0
+     * @return 
+     */
+    public ArrayList<Bloc> getPieceAOrigine(){////////////////////////////////////////mettre dans classe + generale
+        ArrayList<Bloc> listeBloc2 = (ArrayList<Bloc>) listeBloc.clone();
+        if(listeBloc2 != null) {
+            int numBloc = getBlocPosPlusHautGauche();
+            for (int i = 0; i < listeBloc2.size(); i++) {
+                if (!listeBloc2.get(numBloc).equals(listeBloc2.get(i))) {
+                    int x = listeBloc2.get(i).getPosition().getX();
+                    int y = listeBloc2.get(i).getPosition().getY();
+                    int deltax = Math.abs(listeBloc2.get(numBloc).getX() - x);
+                    int deltay = Math.abs(listeBloc2.get(numBloc).getY() - y);
+
+                    Position p = new Position(deltax,deltay);
+                    listeBloc2.get(i).setPosition(p);
+                }
+            }
+            // cas bloc qui se trouve le plus en haut a gauche
+            Position p = new Position(0,0);
+            listeBloc2.get(numBloc).setPosition(p);
+        }
+        return listeBloc2;
+    }
+    private int getBlocPosPlusHautGauche(){
+        int numBloc = -1;
+        if(listeBloc.size()!=0){
+            numBloc = 0;
+            int x = listeBloc.get(0).getX();
+            int y = listeBloc.get(0).getY();
+            for(int i = 1; i< listeBloc.size();i++){
+                if((listeBloc.get(i).getX()<x) &&  (listeBloc.get(i).getY()<y)){
+                    numBloc = i;
+                }
+            }
+        }
+        return numBloc;
     }
 }

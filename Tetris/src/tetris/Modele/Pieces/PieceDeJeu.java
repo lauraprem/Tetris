@@ -71,7 +71,7 @@ public class PieceDeJeu implements Cloneable {
 
     // MUTATEURS
     public void setlisteBlocs(ArrayList<Bloc> listeBloc) {
-        this.listeBloc.removeAll(this.listeBloc);
+        this.listeBloc.clear();//.removeAll(this.listeBloc);
 
         for (int i = 0; i < listeBloc.size(); i++) {
             Bloc bloc = new Bloc();
