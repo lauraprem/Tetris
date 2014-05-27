@@ -5,18 +5,12 @@
  */
 
 package tetris.Vue;
-import com.sun.imageio.plugins.jpeg.JPEG;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Observer;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.border.Border;
-import tetris.Modele.JeuDeTetris;
 
 /**
  *
@@ -37,6 +31,7 @@ public class FenetreAide extends JFrame
         this.setSize(LARGEUR_TOTAL, HAUTEUR_TOTAL);
         this.setResizable(false);
         this.setFocusable(false);
+        this.setLocationRelativeTo(null);
         build();
 
         addWindowListener(new WindowAdapter()
@@ -54,7 +49,7 @@ public class FenetreAide extends JFrame
     {
         JPanel fond = new JPanel();
         fond.setBackground(Color.BLACK);
-        JTextArea text = new JTextArea(aide);
+        JLabel text = new JLabel(aide);
         text.setBackground(Color.BLACK);
         text.setForeground(Color.WHITE);
         fond.add(text);

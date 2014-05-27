@@ -31,8 +31,8 @@ public class FenetreAccueil extends JFrame
     private final int HAUTEUR_TOTAL = 200;
     private final int LARGEUR_TOTAL = 400;
 
-    private JButton commencer;
-    private JButton info;
+    private final JButton commencer;
+    private final JButton info;
 
     private JeuDeTetris tetris;
 
@@ -44,8 +44,9 @@ public class FenetreAccueil extends JFrame
         this.setSize(LARGEUR_TOTAL, HAUTEUR_TOTAL);
         this.setResizable(false);
         this.setFocusable(false);
-        commencer = new JButton("Commencer à jouer", new ImageIcon("src/Contenu/Tetris.png"));
-        info = new JButton("Voir les instructions", new ImageIcon("src/Contenu/aide.png"));
+        this.setLocationRelativeTo(null);
+        commencer = new JButton("Commencer à jouer   ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+        info = new JButton("Voir les instructions   ", new ImageIcon("src/Contenu/Images/aide.png"));
         build();
         addWindowListener(new WindowAdapter()
         {
@@ -67,12 +68,13 @@ public class FenetreAccueil extends JFrame
 // (new BorderLayout());
         commencer.setAlignmentX(CENTER_ALIGNMENT);
         commencer.setBackground(Color.red);
-        commencer.setBorder(BorderFactory.createLineBorder(Color.red, 1));
+        commencer.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
         commencer.addActionListener(new CommencerListener());
 
 //commencer.setIcon();
         info.setAlignmentX(CENTER_ALIGNMENT);
         info.setBackground(Color.red);
+        info.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
         info.addActionListener(new AideListener());
 
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -86,9 +88,10 @@ public class FenetreAccueil extends JFrame
     {
 
         //Redéfinition de la méthode actionPerformed()
+        @Override
         public void actionPerformed(ActionEvent arg0)
         {
-
+            tetris.rejouer();
             FenetreJeu f = new FenetreJeu(tetris);
             f.setVisible(true);
 
@@ -101,6 +104,7 @@ public class FenetreAccueil extends JFrame
     {
 
         //Redéfinition de la méthode actionPerformed()
+        @Override
         public void actionPerformed(ActionEvent arg0)
         {
             FenetreAide f = new FenetreAide();
