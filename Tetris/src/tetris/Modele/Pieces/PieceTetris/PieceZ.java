@@ -49,9 +49,4 @@ public class PieceZ extends PieceDeTetris {
     public Color getCouleurDefaut() {
         return Color.RED;
     }
-    @Override
-    public void deplacerBas(int pasDep) {
-        super.deplacerBas(pasDep);
-        //posRotation = listeBloc.get(numBlocRotation).getPosition();
-    }
 }
