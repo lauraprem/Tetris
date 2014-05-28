@@ -156,7 +156,7 @@ public class FenetreRejouer extends JFrame
             {
                 tetris.rejouer();
                 int nb;
-                if (nbligne.getText() != null && Integer.parseInt(nbligne.getText()) < 20)
+                if (nbligne.getText().length()>0 && Integer.parseInt(nbligne.getText()) < 20)
                 {
                     nb = Integer.parseInt(nbligne.getText());
                 } else
