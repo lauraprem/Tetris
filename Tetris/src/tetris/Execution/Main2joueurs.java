@@ -7,11 +7,11 @@
 package tetris.Execution;
 
 import javax.swing.SwingUtilities;
-import tetris.Controleur.Controleur2Joueur;
-import tetris.Modele.JeuDeTetris2Joueurs;
-import tetris.Modele.JeuDeTetrisMultiJoueur;
-import tetris.Vue.Fenetre2Joueur;
-import tetris.Vue.FenetreJeu;
+import tetris.Controleur.ControleursDeuxJoueurs.Controleur2Joueur;
+import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetris2Joueurs;
+import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetrisMultiJoueur;
+import tetris.Vue.FenetresJeu.VueDeuxJoueurs.Fenetre2Joueur;
+import tetris.Vue.FenetresJeu.FenetreJeu;
 
 /**
  *

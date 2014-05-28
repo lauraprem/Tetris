@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.Modele;
+package tetris.Modele.ModeleDeuxJoueurs;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import tetris.Modele.Action;
+import tetris.Modele.JeuDeTetris;
 import tetris.Modele.Pieces.Bloc;
 import tetris.Modele.Pieces.PieceDeJeu;
 import tetris.Modele.Pieces.Position;

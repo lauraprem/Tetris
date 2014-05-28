@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.Vue;
+package tetris.Vue.FenetresJeu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

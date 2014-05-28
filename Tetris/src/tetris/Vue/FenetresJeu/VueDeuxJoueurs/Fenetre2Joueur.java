@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.Vue;
+package tetris.Vue.FenetresJeu.VueDeuxJoueurs;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,7 +14,8 @@ import java.util.Observer;
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import tetris.Modele.JeuDeTetris2Joueurs;
+import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetris2Joueurs;
+import tetris.Vue.FenetresJeu.FenetreJeu;
 
 /**
  *

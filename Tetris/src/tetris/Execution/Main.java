@@ -2,9 +2,9 @@ package tetris.Execution;
 
 import tetris.Modele.JeuDeTetris;
 import javax.swing.SwingUtilities;
-import tetris.Controleur.ControleurPrincipale;
+import tetris.Controleur.ControleurPrincipal;
 import tetris.Vue.FenetreAccueil;
-import tetris.Vue.FenetreJeu;
+import tetris.Vue.FenetresJeu.FenetreJeu;
 
 /**
  *

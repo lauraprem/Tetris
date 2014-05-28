@@ -5,6 +5,7 @@
  */
 package tetris.Vue;
 
+import tetris.Vue.FenetresJeu.FenetreJeu;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -22,7 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import tetris.Controleur.ControleurPrincipale;
+import tetris.Controleur.ControleurPrincipal;
 import tetris.Modele.JeuDeTetris;
 
 /**
@@ -111,7 +112,7 @@ public class FenetreAccueil extends JFrame
             FenetreJeu f = new FenetreJeu(tetris);
             f.setVisible(true);
 
-            ControleurPrincipale controlleur = new ControleurPrincipale(tetris, f);
+            ControleurPrincipal controlleur = new ControleurPrincipal(tetris, f);
         }
 
     }
@@ -137,7 +138,7 @@ public class FenetreAccueil extends JFrame
             FenetreJeu f = new FenetreJeu(tetris);
             f.setVisible(true);
 
-            ControleurPrincipale controlleur = new ControleurPrincipale(tetris, f);
+            ControleurPrincipal controlleur = new ControleurPrincipal(tetris, f);
         }
 
     }

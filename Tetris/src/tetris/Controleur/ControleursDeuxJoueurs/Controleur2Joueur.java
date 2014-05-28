@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 
-package tetris.Controleur;
+package tetris.Controleur.ControleursDeuxJoueurs;
 
 import sun.management.Agent;
 import tetris.Modele.JeuDeTetris;
-import tetris.Modele.JeuDeTetris2Joueurs;
-import tetris.Modele.JeuDeTetrisMultiJoueur;
-import tetris.Vue.Fenetre2Joueur;
-import tetris.Vue.FenetreJeu;
+import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetris2Joueurs;
+import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetrisMultiJoueur;
+import tetris.Vue.FenetresJeu.VueDeuxJoueurs.Fenetre2Joueur;
+import tetris.Vue.FenetresJeu.FenetreJeu;
 
 /**
  *

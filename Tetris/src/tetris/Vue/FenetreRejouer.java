@@ -5,6 +5,7 @@
  */
 package tetris.Vue;
 
+import tetris.Vue.FenetresJeu.FenetreJeu;
 import java.awt.Color;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;

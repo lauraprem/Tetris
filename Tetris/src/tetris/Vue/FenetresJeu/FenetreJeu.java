@@ -1,4 +1,4 @@
-package tetris.Vue;
+package tetris.Vue.FenetresJeu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,6 +19,8 @@ import tetris.Modele.JeuDeTetris;
 import tetris.Modele.Pieces.Bloc;
 import tetris.Modele.Pieces.PieceDeTetris;
 import tetris.Multimedia.LecteurSon;
+import tetris.Vue.FenetreRejouer;
+import tetris.Vue.Menu;
 
 /**
  *
@@ -47,7 +49,7 @@ public class FenetreJeu extends JFrame implements Observer
         grillePanel = new PanelGrille();
         pieceSuivantePanel = new PanelPieceSuivante();
         menu = new Menu();
-         l = new LecteurSon("./src/Musiques/tetris.wav");
+         l = new LecteurSon("./src/Contenu/Musiques/tetris.wav");
         tetris = t;
 
         HAUTEUR_TOTAL = Toolkit.getDefaultToolkit().getScreenSize().height - 45;

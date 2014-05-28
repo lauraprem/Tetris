@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.Controleur;
+package tetris.Controleur.ControleursDeuxJoueurs;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import tetris.Modele.Action;
 import tetris.Modele.JeuDeTetris;
-import tetris.Modele.JeuDeTetris2Joueurs;
+import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetris2Joueurs;
 
 /**
  *

@@ -1,7 +1,7 @@
 package tetris.Controleur;
 
 import tetris.Modele.JeuDeTetris;
-import tetris.Vue.FenetreJeu;
+import tetris.Vue.FenetresJeu.FenetreJeu;
 
 /**
  * Représente le <b>Controleur Principale</b> qui permet de lancer la vue et le
@@ -9,7 +9,7 @@ import tetris.Vue.FenetreJeu;
  *
  * @author Corinne Fagno && Laura Prémillieu
  */
-public class ControleurPrincipale extends Controleur {
+public class ControleurPrincipal extends Controleur {
 
     protected FenetreJeu vue;
 
@@ -18,7 +18,7 @@ public class ControleurPrincipale extends Controleur {
      * <b>Constructeur<\b> qui permet d'obtenir le modele et la vue par
      * référence
      */
-    public ControleurPrincipale(JeuDeTetris _modele, FenetreJeu _vue) {
+    public ControleurPrincipal(JeuDeTetris _modele, FenetreJeu _vue) {
         super(_modele);
         vue = _vue;
 
