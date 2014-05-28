@@ -7,7 +7,7 @@ package tetris.Controleur.ControleursDeuxJoueurs;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import tetris.Modele.Action;
+import tetris.Modele.Pieces.ActionBloc;
 import tetris.Modele.JeuDeTetris;
 import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetris2Joueurs;
 
@@ -68,31 +68,31 @@ public class ControleurJoueurs implements KeyListener
         switch (event.getKeyCode())
         {
             case KeyEvent.VK_Q: // déplacement à gauche
-                modele1.deplacerPiece(Action.DEPLACEMENT_G);
+                modele1.deplacerPiece(ActionBloc.DEPLACEMENT_G);
                 break;
             case KeyEvent.VK_D: // déplacement à droite
-                modele1.deplacerPiece(Action.DEPLACEMENT_D);
+                modele1.deplacerPiece(ActionBloc.DEPLACEMENT_D);
                 break;
             case KeyEvent.VK_Z: //rotation vers le gauche
-                modele1.deplacerPiece(Action.ROTATION_G);
+                modele1.deplacerPiece(ActionBloc.ROTATION_G);
                 break;
             case KeyEvent.VK_S: //rotation vers la droite
-                modele1.deplacerPiece(Action.ROTATION_D);
+                modele1.deplacerPiece(ActionBloc.ROTATION_D);
                 break;
             case KeyEvent.VK_A:  // ralentir la vitesse de la chute des blocs
                 modele1.decelerer();
                 break;
             case KeyEvent.VK_K: // déplacement à gauche
-                modele2.deplacerPiece(Action.DEPLACEMENT_G);
+                modele2.deplacerPiece(ActionBloc.DEPLACEMENT_G);
                 break;
             case KeyEvent.VK_M: // déplacement à droite
-                modele2.deplacerPiece(Action.DEPLACEMENT_G);
+                modele2.deplacerPiece(ActionBloc.DEPLACEMENT_G);
                 break;
             case KeyEvent.VK_O: //rotation vers le gauche
-                modele2.deplacerPiece(Action.ROTATION_G);
+                modele2.deplacerPiece(ActionBloc.ROTATION_G);
                 break;
             case KeyEvent.VK_L: //rotation vers la droite
-                modele2.deplacerPiece(Action.ROTATION_D);
+                modele2.deplacerPiece(ActionBloc.ROTATION_D);
                 break;
             case KeyEvent.VK_P:  // ralentir la vitesse de la chute des blocs
                 modele2.decelerer();

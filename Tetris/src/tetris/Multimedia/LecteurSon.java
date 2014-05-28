@@ -8,20 +8,23 @@ package tetris.Multimedia;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.Button;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Représente un <b>lecteur de son</b>
  *
- * @author Corinne
+ * @author Corinne Fagno && Laura Prémillieu
  */
 public class LecteurSon {
-    AudioClip bach;
-    Button play, loop, stop;
-
+    protected AudioClip bach;
+    
+    public LecteurSon() {
+        bach = null;
+    }
+    
     public LecteurSon(String f) {
         try {
               File file = new File(f);
@@ -43,6 +46,7 @@ public class LecteurSon {
     }
     
     public void jouerAvecRepetition(){
+        if(bach != null)
         bach.loop();
     }
 }

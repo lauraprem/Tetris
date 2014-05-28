@@ -7,7 +7,7 @@ package tetris.Modele.ModeleDeuxJoueurs;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import tetris.Modele.Action;
+import tetris.Modele.Pieces.ActionBloc;
 import tetris.Modele.JeuDeTetris;
 import tetris.Modele.Pieces.Bloc;
 import tetris.Modele.Pieces.PieceDeJeu;
@@ -68,7 +68,7 @@ public class JeuDeTetris2Joueurs extends JeuDeTetris implements Runnable
     }
     
     @Override
-    public void bougerPiece(Action sens)
+    public void bougerPiece(ActionBloc sens)
     {
         
         if (!deplacerPiece(sens))

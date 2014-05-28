@@ -2,7 +2,7 @@ package tetris.Controleur;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import static tetris.Modele.Action.*;
+import static tetris.Modele.Pieces.ActionBloc.*;
 import tetris.Modele.JeuDeTetris;
 
 /**

@@ -118,7 +118,7 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
      *
      * @return
      */
-    public ArrayList<Bloc> getPieceAOrigine() {////////////////////////////////////////mettre dans classe + generale
+    public ArrayList<Bloc> getPieceAOrigine() {
         ArrayList<Bloc> listeBloc2 = new ArrayList<Bloc>();
         for (int i = 0; i < listeBloc.size(); i++) {
             try {
