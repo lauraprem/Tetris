@@ -41,7 +41,7 @@ public class FenetreRejouer extends JFrame
     private JButton quitterButton;
 
     private JFormattedTextField nbligne;
-    
+
     private JeuDeTetris tetris;
     private FenetreJeu jeu;
 
@@ -50,19 +50,27 @@ public class FenetreRejouer extends JFrame
     public FenetreRejouer(JeuDeTetris t, FenetreJeu j)
     {
         super();
-        tetris = t;
-        jeu = j;
+        if (t != null)
+        {
+            tetris = t;
+        }
+        if (j != null)
+        {
+            jeu = j;
+        }
         this.setTitle("Tetris");
         this.setSize(LARGEUR_TOTAL, HAUTEUR_TOTAL);
         this.setFocusable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        partieTermine = "Vous avez perdu !! Voulez-vous rejouer ?";
+        partieTermine = "Partie terminée !! Voulez-vous rejouer ?";
         rejouerButtonModeA = new JButton("Rejouer en mode A  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
         rejouerButtonModeB = new JButton("Rejouer en mode B  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
         quitterButton = new JButton("Retour au menu  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
-         nbligne = new JFormattedTextField(NumberFormat.getIntegerInstance());
-
+        nbligne = new JFormattedTextField(NumberFormat.getIntegerInstance());
+ nbligne.setBackground(Color.BLACK);
+        nbligne.setBorder(BorderFactory.createLineBorder(Color.red, 1));
+        nbligne.setForeground(Color.white);
         build();
 
         addWindowListener(new WindowAdapter()
@@ -125,39 +133,44 @@ public class FenetreRejouer extends JFrame
         @Override
         public void actionPerformed(ActionEvent arg0)
         {
-            tetris.rejouer();
-            rejouer = true;
-            jeu.reveil();
-            dispose();
+            if (tetris != null || jeu != null)
+            {
+                tetris.rejouer();
+                rejouer = true;
+                jeu.reveil();
+                dispose();
+            }
 
         }
 
     }
-      class RejouerBListener implements ActionListener
+
+    class RejouerBListener implements ActionListener
     {
 
         //Redéfinition de la méthode actionPerformed()
         @Override
         public void actionPerformed(ActionEvent arg0)
         {
-            tetris.rejouer();
-             int nb;
-            if (nbligne.getText() != null && Integer.parseInt(nbligne.getText()) <20)
+            if (tetris != null || jeu != null)
             {
-                nb = Integer.parseInt(nbligne.getText());
-            } else
-            {
-                nb = 10;
+                tetris.rejouer();
+                int nb;
+                if (nbligne.getText() != null && Integer.parseInt(nbligne.getText()) < 20)
+                {
+                    nb = Integer.parseInt(nbligne.getText());
+                } else
+                {
+                    nb = 10;
+                }
+                tetris.genererLignesAlea(nb);
+                rejouer = true;
+                jeu.reveil();
+                dispose();
             }
-            tetris.genererLignesAlea(nb);
-            rejouer = true;
-            jeu.reveil();
-            dispose();
-
         }
 
     }
-
 
     class QuitterListener implements ActionListener
     {
@@ -166,10 +179,12 @@ public class FenetreRejouer extends JFrame
         @Override
         public void actionPerformed(ActionEvent arg0)
         {
+            
             tetris.setMep(true);
             rejouer = false;
             jeu.reveil();
             dispose();
+            
         }
 
     }

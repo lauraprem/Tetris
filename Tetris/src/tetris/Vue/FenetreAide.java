@@ -25,7 +25,7 @@ public class FenetreAide extends JFrame
  public FenetreAide()
     {
         super();
-        aide = "Pour jouer ...\n qkjefbzv efjfuzrhguihzv zhzvu hz h uzhvuz h zofh ozuh zo zh ozu hzf of h\n pouet";
+        aide = "Instructions de jeu :";
         
         this.setTitle("Tetris");
         this.setSize(LARGEUR_TOTAL, HAUTEUR_TOTAL);

@@ -21,10 +21,11 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import tetris.Controleur.ControleurPrincipal;
+import tetris.Controleur.ControleursDeuxJoueurs.Controleur2Joueur;
 import tetris.Modele.JeuDeTetris;
+import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetris2Joueurs;
+import tetris.Vue.FenetresJeu.VueDeuxJoueurs.Fenetre2Joueur;
 
 /**
  *
@@ -32,17 +33,18 @@ import tetris.Modele.JeuDeTetris;
  */
 public class FenetreAccueil extends JFrame
 {
-
-    private final int HAUTEUR_TOTAL = 300;
+    
+    private final int HAUTEUR_TOTAL = 350;
     private final int LARGEUR_TOTAL = 400;
-
+    
     private final JButton commencer;
     private final JButton commencerAlea;
+    private final JButton commencer2joueur;
     private final JButton info;
     private JFormattedTextField nbligne;
-
+    
     private JeuDeTetris tetris;
-
+    
     public FenetreAccueil(JeuDeTetris t)
     {
         super();
@@ -55,8 +57,13 @@ public class FenetreAccueil extends JFrame
         commencer = new JButton("Commencer à jouer mode A   ", new ImageIcon("src/Contenu/Images/Tetris.png"));
         info = new JButton("Voir les instructions   ", new ImageIcon("src/Contenu/Images/aide.png"));
         commencerAlea = new JButton("Commencer à jouer mode B   ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+        commencer2joueur = new JButton("Commencer à jouer à deux   ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+  
         nbligne = new JFormattedTextField(NumberFormat.getIntegerInstance());
-
+        nbligne.setBackground(Color.BLACK);
+        nbligne.setBorder(BorderFactory.createLineBorder(Color.red, 1));
+        nbligne.setForeground(Color.white);
+        
         build();
         addWindowListener(new WindowAdapter()
         {
@@ -68,39 +75,49 @@ public class FenetreAccueil extends JFrame
             }
         });
     }
-
+    
     private void build()
     {
         JPanel principalPanel = new JPanel();
         principalPanel.setBackground(Color.BLACK);
         principalPanel.setLayout(new BoxLayout(principalPanel, BoxLayout.Y_AXIS));
 
+        //Commencer partie mode A
         commencer.setAlignmentX(CENTER_ALIGNMENT);
         commencer.setBackground(Color.red);
         commencer.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
         commencer.addActionListener(new CommencerListener());
-
-        //     JTextField nbligneuh = new JTextField("10");
-        info.setAlignmentX(CENTER_ALIGNMENT);
-        info.setBackground(Color.red);
-        info.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
-        info.addActionListener(new AideListener());
-
+        
+        //Commencer partie mode B
         commencerAlea.setAlignmentX(CENTER_ALIGNMENT);
         commencerAlea.setBackground(Color.red);
         commencerAlea.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
         commencerAlea.addActionListener(new CommencerAleaListener());
 
+        //Commencer partie 2 joueurs
+        commencer2joueur.setAlignmentX(CENTER_ALIGNMENT);
+        commencer2joueur.setBackground(Color.red);
+        commencer2joueur.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
+        commencer2joueur.addActionListener(new Commencer2JoueurListener());
+        
+        //Voir l'aide
+        info.setAlignmentX(CENTER_ALIGNMENT);
+        info.setBackground(Color.red);
+        info.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
+        info.addActionListener(new AideListener());
+        
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         principalPanel.add(commencer);
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         principalPanel.add(commencerAlea);
         principalPanel.add(nbligne);
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        principalPanel.add(commencer2joueur);
+        principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         principalPanel.add(info);
         this.add(principalPanel);
     }
-
+    
     class CommencerListener implements ActionListener
     {
 
@@ -111,12 +128,12 @@ public class FenetreAccueil extends JFrame
             tetris.rejouer();
             FenetreJeu f = new FenetreJeu(tetris);
             f.setVisible(true);
-
+            
             ControleurPrincipal controlleur = new ControleurPrincipal(tetris, f);
         }
-
+        
     }
-
+    
     class CommencerAleaListener implements ActionListener
     {
 
@@ -126,23 +143,44 @@ public class FenetreAccueil extends JFrame
         {
             tetris.rejouer();
             int nb;
-            if (nbligne.getText() != null && Integer.parseInt(nbligne.getText()) <20)
+            if (nbligne.getText().length()>0 && Integer.parseInt(nbligne.getText()) < 20)
             {
                 nb = Integer.parseInt(nbligne.getText());
             } else
             {
                 nb = 10;
             }
-
+            
             tetris.genererLignesAlea(nb);
             FenetreJeu f = new FenetreJeu(tetris);
             f.setVisible(true);
-
+            
             ControleurPrincipal controlleur = new ControleurPrincipal(tetris, f);
         }
-
+        
     }
+    
+      class Commencer2JoueurListener implements ActionListener
+    {
 
+        //Redéfinition de la méthode actionPerformed()
+        @Override
+        public void actionPerformed(ActionEvent arg0)
+        {
+            
+                JeuDeTetris2Joueurs modele1 = new JeuDeTetris2Joueurs();
+                JeuDeTetris2Joueurs modele2 = new JeuDeTetris2Joueurs();
+                FenetreJeu vue1 = new FenetreJeu(modele1);
+                FenetreJeu vue2 = new FenetreJeu(modele2);
+                Fenetre2Joueur vue = new Fenetre2Joueur(vue1, vue2);
+                Controleur2Joueur controleur = new Controleur2Joueur(modele1,modele2,vue);
+                vue.setVisible(true);
+            
+            
+        }
+        
+    }
+    
     class AideListener implements ActionListener
     {
 
@@ -152,9 +190,9 @@ public class FenetreAccueil extends JFrame
         {
             FenetreAide f = new FenetreAide();
             f.setVisible(true);
-
+            
         }
-
+        
     }
-
+    
 }

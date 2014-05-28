@@ -1,7 +1,6 @@
 package tetris.Modele;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import tetris.Modele.Pieces.Bloc;
 import tetris.Modele.Pieces.PieceDeTetris;
 import tetris.Modele.Pieces.PieceTetris.*;
@@ -9,7 +8,8 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Random;
-import static tetris.Modele.Action.TOMBER;
+import tetris.Modele.Pieces.ActionBloc;
+import static tetris.Modele.Pieces.ActionBloc.*;
 import tetris.Modele.Pieces.Position;
 import tetris.Modele.Score.Score;
 
@@ -119,20 +119,28 @@ public class JeuDeTetris extends Observable implements Runnable
         termine = false;
     }
 
-    public void genererLignesAlea(int nblignealea)
-    {
+    public void genererLignesAlea(int nblignealea) {
         Random r = new Random();
-        int rand;
-        for (int i = hauteur - 1; i >= hauteur - nblignealea; i--)
-        {
-            for (int j = 0; j < largeur; j++)
-            {
-                if (r.nextInt(2) == 0)
-                {
-                    blocEnJeu.add(new Bloc(new Position(i, j), Color.CYAN));
+
+        for (int i = hauteur - 1; i >= hauteur - nblignealea; i--) {
+            for (int j = 0; j < largeur; j++) {
+                if (r.nextInt(2) == 0) {
+                    blocEnJeu.add(new Bloc(new Position(i, j), CouleurAleatoire()));
                 }
             }
         }
+    }
+
+    private Color CouleurAleatoire() {
+        Random rand = new Random();
+        int couleurFonce = 40;
+        int bleu = rand.nextInt(256-couleurFonce)+couleurFonce;
+        int rouge = rand.nextInt(256-couleurFonce)+couleurFonce;
+        int vert = rand.nextInt(256-couleurFonce)+couleurFonce;
+        
+        Color c = new Color(rouge, vert, bleu);
+        
+        return c;
     }
 
     // ACCESSEURS
@@ -375,7 +383,7 @@ public class JeuDeTetris extends Observable implements Runnable
      * -1 pour en bas
      * @return vrai si la pièce a pu etre déplacée et faux sinon
      */
-    public synchronized boolean deplacerPiece(Action sens)
+    public synchronized boolean deplacerPiece(ActionBloc sens)
     {
         if (!isMep())
         {
@@ -510,7 +518,7 @@ public class JeuDeTetris extends Observable implements Runnable
      *
      * @param sens sens dans lequel on veut déplacer la pièce
      */
-    public void bougerPiece(Action sens)
+    public void bougerPiece(ActionBloc sens)
     {
         if (!deplacerPiece(sens))
         {

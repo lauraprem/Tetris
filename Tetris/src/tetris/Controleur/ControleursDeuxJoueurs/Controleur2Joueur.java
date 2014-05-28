@@ -6,12 +6,9 @@
 
 package tetris.Controleur.ControleursDeuxJoueurs;
 
-import sun.management.Agent;
-import tetris.Modele.JeuDeTetris;
 import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetris2Joueurs;
 import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetrisMultiJoueur;
 import tetris.Vue.FenetresJeu.VueDeuxJoueurs.Fenetre2Joueur;
-import tetris.Vue.FenetresJeu.FenetreJeu;
 
 /**
  *
@@ -42,8 +39,6 @@ public class Controleur2Joueur
          jeu1.addObserver(vue.getJeu1());
          jeu2.addObserver(vue.getJeu2());
              
-         jeu.addObserver(vue.getJeu1());
-         jeu.addObserver(vue.getJeu2());
          jeu.addObserver(vue);
          (new Thread (jeu)).start();
          

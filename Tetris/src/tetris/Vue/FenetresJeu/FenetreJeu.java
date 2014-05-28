@@ -41,7 +41,7 @@ public class FenetreJeu extends JFrame implements Observer
     private PanelPieceSuivante pieceSuivantePanel;
     private Menu menu;
 
-    LecteurSon l;
+    private LecteurSon l;
     public FenetreJeu(JeuDeTetris t)
     {
         super();
@@ -314,6 +314,17 @@ public class FenetreJeu extends JFrame implements Observer
     {
         return tetris;
     }
+
+    public LecteurSon getL()
+    {
+        return l;
+    }
+
+    public void setL(LecteurSon l)
+    {
+        this.l = l;
+    }
+    
     
     
 

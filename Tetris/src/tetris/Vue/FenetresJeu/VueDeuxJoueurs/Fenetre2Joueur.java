@@ -15,6 +15,7 @@ import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import tetris.Modele.ModeleDeuxJoueurs.JeuDeTetris2Joueurs;
+import tetris.Vue.FenetreRejouer;
 import tetris.Vue.FenetresJeu.FenetreJeu;
 
 /**
@@ -37,6 +38,7 @@ public class Fenetre2Joueur extends JFrame implements Observer
         this.setFocusable(false);
         jeu1 = vue1;
         jeu2 = vue2;
+        jeu2.getL().stopper();
         jeu1.getPrincipalPanel().setFocusable(false);
         jeu2.getPrincipalPanel().setFocusable(false);
         principalPanel = new JPanel(new BorderLayout());
@@ -48,8 +50,9 @@ public class Fenetre2Joueur extends JFrame implements Observer
             @Override
             public void windowClosing(WindowEvent arg0)
             {
+                jeu1.getL().stopper();
                 super.windowClosing(arg0);
-                System.exit(0);
+                dispose();
             }
         });
 
@@ -121,6 +124,11 @@ public class Fenetre2Joueur extends JFrame implements Observer
             if (sup)
             {
                 jeu2.rafraichirAffichage(jeu2.getTetris().getBlocEnJeu(), jeu2.getTetris().getPiecesSuivantes(), jeu2.getTetris().getScore().getNiveau(), jeu2.getTetris().getScore().getPoint());
+            }
+            if (jeu1.getTetris().isTermine() || jeu2.getTetris().isTermine())
+            {
+                jeu1.getL().stopper();
+                dispose();
             }
         }
     }

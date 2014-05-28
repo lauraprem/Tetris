@@ -86,17 +86,13 @@ public class PanelPieceSuivante extends JPanel
 
     public void afficherPiecesSuivantes(ArrayList<PieceDeTetris> piecesSuivantes, int nbPiece)
     {
+        
         for (int j = 0; j < nbPiece; j++)
         {
-            for (int i = 0; i < piecesSuivantes.get(j).getlisteBlocs().size(); i++)
+            for (int i = 0; i < piecesSuivantes.get(j).getPieceAOrigine().size(); i++)
             {
-                int k = piecesSuivantes.get(j).getBlocPosY(0) - 1;
-                int l = piecesSuivantes.get(j).getBlocPosX(0);
-                if (piecesSuivantes.get(j).getClass() == PieceI.class)
-                {
-                    k++;
-                }
-                casesSuivantes.get(j)[piecesSuivantes.get(j).getBlocPosX(i) - l][piecesSuivantes.get(j).getBlocPosY(i) - k].setBackground(piecesSuivantes.get(j).getBloc(i).getCouleur());
+                
+                casesSuivantes.get(j)[piecesSuivantes.get(j).getPieceAOrigine().get(i).getX() ][piecesSuivantes.get(j).getPieceAOrigine().get(i).getY()].setBackground(piecesSuivantes.get(j).getPieceAOrigine().get(i).getCouleur());
             }
         }
     }
