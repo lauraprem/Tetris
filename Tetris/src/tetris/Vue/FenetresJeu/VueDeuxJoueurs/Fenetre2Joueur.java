@@ -128,6 +128,8 @@ public class Fenetre2Joueur extends JFrame implements Observer
             if (jeu1.getTetris().isTermine() || jeu2.getTetris().isTermine())
             {
                 jeu1.getL().stopper();
+                jeu1.dispose();
+                jeu2.dispose();
                 dispose();
             }
         }

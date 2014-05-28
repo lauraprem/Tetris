@@ -32,7 +32,7 @@ import tetris.Modele.JeuDeTetris;
 public class FenetreRejouer extends JFrame
 {
 
-    private final int HAUTEUR_TOTAL = 300;
+    private final int HAUTEUR_TOTAL = 250;
     private final int LARGEUR_TOTAL = 400;
     private String partieTermine;
 
@@ -122,7 +122,7 @@ public class FenetreRejouer extends JFrame
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         principalPanel.add(nbligne);
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        principalPanel.add(quitterButton);
+      //  principalPanel.add(quitterButton);
 
     }
 

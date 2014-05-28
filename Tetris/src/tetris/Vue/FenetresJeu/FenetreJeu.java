@@ -42,6 +42,7 @@ public class FenetreJeu extends JFrame implements Observer
     private Menu menu;
 
     private LecteurSon l;
+
     public FenetreJeu(JeuDeTetris t)
     {
         super();
@@ -49,7 +50,7 @@ public class FenetreJeu extends JFrame implements Observer
         grillePanel = new PanelGrille();
         pieceSuivantePanel = new PanelPieceSuivante();
         menu = new Menu();
-         l = new LecteurSon("./src/Contenu/Musiques/tetris.wav");
+        l = new LecteurSon("./src/Contenu/Musiques/tetris.wav");
         tetris = t;
 
         HAUTEUR_TOTAL = Toolkit.getDefaultToolkit().getScreenSize().height - 45;
@@ -69,10 +70,10 @@ public class FenetreJeu extends JFrame implements Observer
             public void windowClosing(WindowEvent arg0)
             {
                 tetris.gestionEnPause();
-                 if (l != null)
-                 {
-                 l.stopper();
-                 }
+                if (l != null)
+                {
+                    l.stopper();
+                }
                 dispose();
             }
         });
@@ -117,8 +118,8 @@ public class FenetreJeu extends JFrame implements Observer
             grillePanel.afficherBlocsFixes(tetris.getBlocEnJeu());
         }
 
-         l.jouerAvecRepetition();
-         
+        l.jouerAvecRepetition();
+
     }
 
     public JPanel getPrincipalPanel()
@@ -162,10 +163,10 @@ public class FenetreJeu extends JFrame implements Observer
 
                     if (!f.getRejouer())
                     {
-                         if (l != null)
-                         {
-                         l.stopper();
-                         }
+                        if (l != null)
+                        {
+                            l.stopper();
+                        }
                         dispose();
                     }
 
@@ -179,7 +180,7 @@ public class FenetreJeu extends JFrame implements Observer
                     rafraichirAffichage(blocsEnJeu, piecesSuivantes, niveau, score);
                 }
             }
-            if (tetris.isCollision() )//|| (( tetris.getClass() == JeuDeTetris2Joueurs.class ) &&((JeuDeTetris2Joueurs)tetris.isSupprLigne())))
+            if (tetris.isCollision())//|| (( tetris.getClass() == JeuDeTetris2Joueurs.class ) &&((JeuDeTetris2Joueurs)tetris.isSupprLigne())))
             {
                 rafraichirAffichage(blocsEnJeu, piecesSuivantes, niveau, score);
             }
@@ -230,51 +231,31 @@ public class FenetreJeu extends JFrame implements Observer
         @Override
         public synchronized void actionPerformed(ActionEvent e)
         {
-            int nb;
-            if ("N'afficher aucune piece en avance".equals(e.getActionCommand()))
-            {
-                nb = 0;
-            } /*else if (e.getItem().equals(menu.getSousmenu1()))
-             {
-             nb = 1;
-             } else if (e.getItem().equals(menu.getSousmenu2()))
-             {
-             nb = 2;
-             } else if (e.getItem().equals(menu.getSousmenu3()))
-             {
-             nb = 3;
-             } else
-             {
-             nb = 4;
-             }*/
-
-            // pieceSuivantePanel.afficherPiecesSuivantes(tetris.getPiecesSuivantes(), nb);
-            pieceSuivantePanel.afficherPiecesSuivantes(tetris.getPiecesSuivantes(), menu.getNombrePieceAfficher());
-            System.out.println("clic ");
+            System.out.println(" ");
         }
 
         @Override
         public void itemStateChanged(ItemEvent e)
         {
             System.out.println("State changed: ");
-            /*  int nb;
-             if (e.getItem().equals(menu.getSousmenu0()))
-             {
-             nb = 0;
-             } else if (e.getItem().equals(menu.getSousmenu1()))
-             {
-             nb = 1;
-             } else if (e.getItem().equals(menu.getSousmenu2()))
-             {
-             nb = 2;
-             } else if (e.getItem().equals(menu.getSousmenu3()))
-             {
-             nb = 3;
-             } else
-             {
-             nb = 4;
-             }
-             pieceSuivantePanel.afficherPiecesSuivantes(tetris.getPiecesSuivantes(), nb);*/
+            int nb;
+            if (e.getItem().equals(menu.getSousmenu0()))
+            {
+                nb = 0;
+            } else if (e.getItem().equals(menu.getSousmenu1()))
+            {
+                nb = 1;
+            } else if (e.getItem().equals(menu.getSousmenu2()))
+            {
+                nb = 2;
+            } else if (e.getItem().equals(menu.getSousmenu3()))
+            {
+                nb = 3;
+            } else
+            {
+                nb = 4;
+            }
+            pieceSuivantePanel.afficherPiecesSuivantes(tetris.getPiecesSuivantes(), nb);
 
         }
 
@@ -324,8 +305,5 @@ public class FenetreJeu extends JFrame implements Observer
     {
         this.l = l;
     }
-    
-    
-    
 
 }
