@@ -16,7 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import tetris.Modele.JeuDeTetris;
-import tetris.Modele.JeuDeTetris2Joueurs;
 import tetris.Modele.Pieces.Bloc;
 import tetris.Modele.Pieces.PieceDeTetris;
 import tetris.Multimedia.LecteurSon;
@@ -67,11 +66,12 @@ public class FenetreJeu extends JFrame implements Observer
             @Override
             public void windowClosing(WindowEvent arg0)
             {
+                tetris.gestionEnPause();
                  if (l != null)
                  {
                  l.stopper();
                  }
-                super.windowClosing(arg0);
+                dispose();
             }
         });
     }

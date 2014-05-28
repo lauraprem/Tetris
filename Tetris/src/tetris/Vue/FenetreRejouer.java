@@ -12,11 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.NumberFormat;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,6 +39,8 @@ public class FenetreRejouer extends JFrame
     private JButton rejouerButtonModeB;
     private JButton quitterButton;
 
+    private JFormattedTextField nbligne;
+    
     private JeuDeTetris tetris;
     private FenetreJeu jeu;
 
@@ -56,6 +60,8 @@ public class FenetreRejouer extends JFrame
         rejouerButtonModeA = new JButton("Rejouer en mode A  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
         rejouerButtonModeB = new JButton("Rejouer en mode B  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
         quitterButton = new JButton("Retour au menu  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+         nbligne = new JFormattedTextField(NumberFormat.getIntegerInstance());
+
         build();
 
         addWindowListener(new WindowAdapter()
@@ -105,6 +111,8 @@ public class FenetreRejouer extends JFrame
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         principalPanel.add(rejouerButtonModeB);
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        principalPanel.add(nbligne);
+        principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         principalPanel.add(quitterButton);
 
     }
@@ -132,7 +140,15 @@ public class FenetreRejouer extends JFrame
         public void actionPerformed(ActionEvent arg0)
         {
             tetris.rejouer();
-            tetris.genererLignesAlea(10);
+             int nb;
+            if (nbligne.getText() != null && Integer.parseInt(nbligne.getText()) <20)
+            {
+                nb = Integer.parseInt(nbligne.getText());
+            } else
+            {
+                nb = 10;
+            }
+            tetris.genererLignesAlea(nb);
             rejouer = true;
             jeu.reveil();
             dispose();

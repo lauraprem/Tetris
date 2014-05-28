@@ -47,6 +47,6 @@ public class PieceT extends PieceDeTetris {
      */
     @Override
     public Color getCouleurDefaut() {
-        return Color.PINK;
+        return Color.MAGENTA;
     }
 }

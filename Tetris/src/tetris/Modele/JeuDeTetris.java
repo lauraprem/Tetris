@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Random;
+import static tetris.Modele.Action.TOMBER;
 import tetris.Modele.Pieces.Position;
 import tetris.Modele.Score.Score;
 
@@ -22,6 +23,7 @@ public class JeuDeTetris extends Observable implements Runnable
 {
 
     // ATTRIBUTS
+    protected final int tempsInitial;
     /**
      * Pas de temps de la chute des blocs
      */
@@ -35,7 +37,7 @@ public class JeuDeTetris extends Observable implements Runnable
      * Nombre de colonnes de la Grille
      */
     protected int largeur;
-    
+
     protected Score score;
 
     /**
@@ -79,8 +81,6 @@ public class JeuDeTetris extends Observable implements Runnable
      * Permet de savoir si la piece rentre en collision avec les blocs
      */
     protected boolean collision;
-    
-    
 
     // CONSTRUCTEURS
     /**
@@ -100,6 +100,7 @@ public class JeuDeTetris extends Observable implements Runnable
      */
     public JeuDeTetris(int largeur, int hauteur)
     {
+        tempsInitial = 1000;
         this.hauteur = hauteur;
         this.largeur = largeur;
         score = new Score();
@@ -120,11 +121,11 @@ public class JeuDeTetris extends Observable implements Runnable
 
     public void genererLignesAlea(int nblignealea)
     {
-        Random r =new Random();
+        Random r = new Random();
         int rand;
-        for(int i = hauteur -1; i>= hauteur -nblignealea; i--)
+        for (int i = hauteur - 1; i >= hauteur - nblignealea; i--)
         {
-            for(int j = 0; j<largeur;j++)
+            for (int j = 0; j < largeur; j++)
             {
                 if (r.nextInt(2) == 0)
                 {
@@ -133,7 +134,7 @@ public class JeuDeTetris extends Observable implements Runnable
             }
         }
     }
-    
+
     // ACCESSEURS
     /**
      * <b>Accesseur</b> permettant de recuperer le nombre de lignes de la Grille
@@ -211,8 +212,6 @@ public class JeuDeTetris extends Observable implements Runnable
         return score;
     }
 
-    
-    
     // MUTATEURS
     /**
      * <b>Mutateur</b> permettant de modifier le nombre de lignes de la zone de
@@ -285,8 +284,6 @@ public class JeuDeTetris extends Observable implements Runnable
     {
         this.score = score;
     }
-    
-    
 
     // METHODES
     /**
@@ -378,45 +375,46 @@ public class JeuDeTetris extends Observable implements Runnable
      * -1 pour en bas
      * @return vrai si la pièce a pu etre déplacée et faux sinon
      */
-    public synchronized boolean deplacerPiece(int sens)
+    public synchronized boolean deplacerPiece(Action sens)
     {
-
-        fantome = (PieceDeTetris) pieceCourante.clone();
-
-        
-        
-        // Recherche de l'action futur à réaliser
-        switch (sens)
+        if (!isMep())
         {
-            case KeyEvent.VK_Q: // déplacement à gauche
-                fantome.deplacerGauche(1);
-                break;
-            case KeyEvent.VK_D: // déplacement à droite
-                fantome.deplacerDroite(1);
-                break;
-            case KeyEvent.VK_K: //rotation vers le gauche
-                fantome.rotationPiece(-90);
-                break;
-            case KeyEvent.VK_M: //rotation vers la droite
-                fantome.rotationPiece(90);
-                break;
-            default: //deplacement par defaut
-                fantome.deplacerBas(1);
-                break;
-        }
 
-        // Verification de la colision
-        collision = (verifCollision());
-        if (!collision)
-        {
-            PieceDeTetris temp = (PieceDeTetris) fantome.clone();
             fantome = (PieceDeTetris) pieceCourante.clone();
-            pieceCourante = temp;
-            // indication de la modification à la vue
-            setChanged();
-            notifyObservers();
 
-            return true;
+            // Recherche de l'action futur à réaliser
+            switch (sens)
+            {
+                case DEPLACEMENT_G : // déplacement à gauche
+                    fantome.deplacerGauche(1);
+                    break;
+                case DEPLACEMENT_D: // déplacement à droite
+                    fantome.deplacerDroite(1);
+                    break;
+                case ROTATION_G: //rotation vers le gauche
+                    fantome.rotationPiece(-90);
+                    break;
+                case ROTATION_D: //rotation vers la droite
+                    fantome.rotationPiece(90);
+                    break;
+                default: //deplacement par defaut
+                    fantome.deplacerBas(1);
+                    break;
+            }
+
+            // Verification de la colision
+            collision = (verifCollision());
+            if (!collision)
+            {
+                PieceDeTetris temp = (PieceDeTetris) fantome.clone();
+                fantome = (PieceDeTetris) pieceCourante.clone();
+                pieceCourante = temp;
+                // indication de la modification à la vue
+                setChanged();
+                notifyObservers();
+
+                return true;
+            }
         }
 
         //   }
@@ -512,32 +510,32 @@ public class JeuDeTetris extends Observable implements Runnable
      *
      * @param sens sens dans lequel on veut déplacer la pièce
      */
-    public void bougerPiece(int sens)
+    public void bougerPiece(Action sens)
     {
         if (!deplacerPiece(sens))
         {
             fixerPiece();
             int ligne;
-            int nbligne =0;
+            int nbligne = 0;
             while ((ligne = verifLigne()) != -1)
             {
                 nbligne++;
                 supprimerLigne(ligne);
             }
             getScore().calculerScore(nbligne);
+            setPasTemps(tempsInitial - getScore().getNiveau() * 70  );
             passerPieceSuivante();
 
             // Verifie si la partie est perdu
             if (verifCollision())
             {
                 setTermine(true);
-                setMep(true) ;
+                setMep(true);
             }
 
         }
     }
 
-   
     @Override
     public void run()
     {
@@ -550,7 +548,7 @@ public class JeuDeTetris extends Observable implements Runnable
             while (true)
             {
 
-                bougerPiece(-1);
+                bougerPiece(TOMBER);
                 setChanged();
                 notifyObservers();
                 Thread.currentThread().sleep(getPasTemps());
@@ -562,8 +560,10 @@ public class JeuDeTetris extends Observable implements Runnable
                         wait();
                     }
                 }
-                if(isTermine())
-                {break;}
+                if (isTermine())
+                {
+                    break;
+                }
             }
         } catch (InterruptedException ex)
         {
@@ -598,7 +598,7 @@ public class JeuDeTetris extends Observable implements Runnable
     {
         if (mep != true && accelerer == true)
         {
-            pasTemps = pasTemps * 8;
+            setPasTemps(tempsInitial - getScore().getNiveau() * 70 );
             accelerer = false;
         }
     }
@@ -610,7 +610,7 @@ public class JeuDeTetris extends Observable implements Runnable
     {
         if (accelerer == false && mep != true)
         {
-            pasTemps = pasTemps / 8;
+            setPasTemps(30);
             accelerer = true;
         }
     }
@@ -630,9 +630,7 @@ public class JeuDeTetris extends Observable implements Runnable
             if (mep == true)
             {
                 mep = false;
-                // synchronized (this) {
                 notify();
-                //}
             } else
             {
                 mep = true;
