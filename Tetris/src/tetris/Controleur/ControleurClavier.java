@@ -13,6 +13,7 @@ public class ControleurClavier extends Controleur implements KeyListener {
     // CONSTRUCTEUR
     /**
      * <b>Constructeur<\b> par defaut
+     *
      * @param modele
      */
     public ControleurClavier(JeuDeTetris modele) {
@@ -21,17 +22,23 @@ public class ControleurClavier extends Controleur implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent event) {
-            System.out.println("Caractère touché : " + event.getKeyChar());
+        System.out.println("Caractère touché : " + event.getKeyChar());
     }
 
     @Override
     public void keyPressed(KeyEvent event) {
         System.out.println("Code touche pressée : " + event.getKeyCode());
         switch (event.getKeyCode()) {
+            case KeyEvent.VK_Q: // déplacement à gauche
+                modele.deplacerPiece(event.getKeyCode());
+                break;
+            case KeyEvent.VK_D: // déplacement à droite
+                modele.deplacerPiece(event.getKeyCode());
+                break;
             case KeyEvent.VK_SPACE: // met en pause le jeu
                 modele.gestionEnPause();
                 break;
-            case KeyEvent.VK_DOWN: // accélerer la vitesse de la chute des blocs
+            case KeyEvent.VK_L: // accélerer la vitesse de la chute des blocs
                 modele.accelerer();
                 break;
             default:
@@ -42,21 +49,15 @@ public class ControleurClavier extends Controleur implements KeyListener {
     @Override
     public void keyReleased(KeyEvent event) {
         System.out.println("Code touche relaché : " + event.getKeyCode());
-        
+
         switch (event.getKeyCode()) {
-            case KeyEvent.VK_Q: // déplacement à gauche
+            case KeyEvent.VK_K: //rotation vers le gauche
                 modele.deplacerPiece(event.getKeyCode());
                 break;
-            case KeyEvent.VK_D: // déplacement à droite
+            case KeyEvent.VK_M: //rotation vers la droite
                 modele.deplacerPiece(event.getKeyCode());
                 break;
-            case KeyEvent.VK_LEFT: //rotation vers le gauche
-                modele.deplacerPiece(event.getKeyCode());
-                break;
-            case KeyEvent.VK_RIGHT: //rotation vers la droite
-                modele.deplacerPiece(event.getKeyCode());
-                break;
-            case KeyEvent.VK_DOWN:  // ralentir la vitesse de la chute des blocs
+            case KeyEvent.VK_L:  // ralentir la vitesse de la chute des blocs
                 modele.decelerer();
             default:
                 break;
@@ -64,3 +65,5 @@ public class ControleurClavier extends Controleur implements KeyListener {
     }
 
 }
+        
+  
