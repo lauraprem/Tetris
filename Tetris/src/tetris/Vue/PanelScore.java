@@ -26,20 +26,28 @@ public class PanelScore extends JPanel
 
     private JLabel score;
     private JLabel niveau;
-    
+    JLabel s;
+    JLabel n;
+
     public PanelScore()
     {
         super();
         score = new JLabel("0");
         niveau = new JLabel("1");
-        
+        s = new JLabel("Score\n");
+        n = new JLabel("Niveau\n");
         Border whiteline = BorderFactory.createLineBorder(Color.WHITE, 1);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setOpaque(false);
         this.setBorder(whiteline);
         this.setPreferredSize(new Dimension(200, 600));
-       
+
         build();
+    }
+
+    public void setTaille(int largeur, int hauteur)
+    {
+        this.setPreferredSize(new Dimension(largeur, hauteur));
     }
 
     public JLabel getScore()
@@ -55,35 +63,40 @@ public class PanelScore extends JPanel
     public void setNiveau(int niveau)
     {
         this.niveau.setText(Integer.toString(niveau));
-        
-        
+
     }
-    
+
     public void setScore(int score)
     {
         this.score.setText(Integer.toString(score));
     }
-   
-      
-    private void build(){
-        JLabel s = new JLabel("Score\n");
-        JLabel n = new JLabel("Niveau\n");
-        
+
+    public void setTaillePolice(int intitule, int nombre)
+    {
+        s.setFont(new Font("Arial", Font.BOLD, intitule));
+        n.setFont(new Font("Arial", Font.BOLD, intitule));
+        score.setFont(new Font("Arial", Font.BOLD, nombre));
+        niveau.setFont(new Font("Arial", Font.BOLD, nombre));
+    }
+    
+    private void build()
+    {
+
         //Panel affichant "score"
         s.setFont(new Font("Arial", Font.BOLD, 40));
         s.setForeground(Color.WHITE);
         s.setAlignmentX(CENTER_ALIGNMENT);
-        
+
         //Panel affichant le score
         score.setFont(new Font("Arial", Font.BOLD, 35));
         score.setForeground(Color.WHITE);
         score.setAlignmentX(CENTER_ALIGNMENT);
-        
+
         //Panel affichant "niveau"
         n.setFont(new Font("Arial", Font.BOLD, 40));
         n.setForeground(Color.WHITE);
         n.setAlignmentX(CENTER_ALIGNMENT);
-        
+
         //Panel affichant le niveau
         niveau.setFont(new Font("Arial", Font.BOLD, 35));
         niveau.setForeground(Color.WHITE);

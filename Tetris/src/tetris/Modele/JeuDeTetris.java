@@ -1,5 +1,6 @@
 package tetris.Modele;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import tetris.Modele.Pieces.Bloc;
 import tetris.Modele.Pieces.PieceDeTetris;
@@ -24,60 +25,60 @@ public class JeuDeTetris extends Observable implements Runnable
     /**
      * Pas de temps de la chute des blocs
      */
-    private int pasTemps;
+    protected int pasTemps;
     /**
      * Nombre de lignes de la Grille
      */
-    private int hauteur;
+    protected int hauteur;
 
     /**
      * Nombre de colonnes de la Grille
      */
-    private int largeur;
+    protected int largeur;
     
-    private Score score;
+    protected Score score;
 
     /**
      * Piece courante
      */
-    private PieceDeTetris pieceCourante;
+    protected PieceDeTetris pieceCourante;
 
     /**
      * Piece pour détecter les collisions et mémoriser la derniere position de
      * la piece courante
      */
-    private PieceDeTetris fantome;
+    protected PieceDeTetris fantome;
 
     /**
      * les prochaines pièces à jouer
      */
-    private ArrayList<PieceDeTetris> piecesSuivantes;
+    protected ArrayList<PieceDeTetris> piecesSuivantes;
 
     /**
      * les blocs qui composaient les pièces qui ont déjà été jouées et qui sont
      * fixes
      */
-    private ArrayList<Bloc> blocEnJeu;
+    protected ArrayList<Bloc> blocEnJeu;
 
     /**
      * permet de savoir si leu jeu est pause
      */
-    private boolean mep;
+    protected boolean mep;
 
     /**
      * permet de savoir si le jeu est en accéléré
      */
-    private boolean accelerer;
+    protected boolean accelerer;
 
     /**
      * permet de savoir si la partie est terminé
      */
-    private boolean termine;
+    protected boolean termine;
 
     /**
      * Permet de savoir si la piece rentre en collision avec les blocs
      */
-    private boolean collision;
+    protected boolean collision;
     
     
 
@@ -117,6 +118,22 @@ public class JeuDeTetris extends Observable implements Runnable
         termine = false;
     }
 
+    public void genererLignesAlea(int nblignealea)
+    {
+        Random r =new Random();
+        int rand;
+        for(int i = hauteur -1; i>= hauteur -nblignealea; i--)
+        {
+            for(int j = 0; j<largeur;j++)
+            {
+                if (r.nextInt(2) == 0)
+                {
+                    blocEnJeu.add(new Bloc(new Position(i, j), Color.CYAN));
+                }
+            }
+        }
+    }
+    
     // ACCESSEURS
     /**
      * <b>Accesseur</b> permettant de recuperer le nombre de lignes de la Grille
@@ -189,7 +206,7 @@ public class JeuDeTetris extends Observable implements Runnable
         return pieceCourante;
     }
 
-    public Score getScore()
+    public synchronized Score getScore()
     {
         return score;
     }
@@ -264,7 +281,7 @@ public class JeuDeTetris extends Observable implements Runnable
         return mep;
     }
 
-    public void setScore(Score score)
+    public synchronized void setScore(Score score)
     {
         this.score = score;
     }
@@ -287,7 +304,7 @@ public class JeuDeTetris extends Observable implements Runnable
      *
      * @return une piece de tetris
      */
-    private PieceDeTetris genererPiece()
+    protected PieceDeTetris genererPiece()
     {
         Random r = new Random();
         int forme = r.nextInt(7);
@@ -495,7 +512,7 @@ public class JeuDeTetris extends Observable implements Runnable
      *
      * @param sens sens dans lequel on veut déplacer la pièce
      */
-    public synchronized void bougerPiece(int sens)
+    public void bougerPiece(int sens)
     {
         if (!deplacerPiece(sens))
         {
@@ -507,14 +524,14 @@ public class JeuDeTetris extends Observable implements Runnable
                 nbligne++;
                 supprimerLigne(ligne);
             }
-            score.calculerScore(nbligne);
+            getScore().calculerScore(nbligne);
             passerPieceSuivante();
 
             // Verifie si la partie est perdu
             if (verifCollision())
             {
-                termine = true;
-                mep = true;
+                setTermine(true);
+                setMep(true) ;
             }
 
         }
@@ -545,6 +562,8 @@ public class JeuDeTetris extends Observable implements Runnable
                         wait();
                     }
                 }
+                if(isTermine())
+                {break;}
             }
         } catch (InterruptedException ex)
         {

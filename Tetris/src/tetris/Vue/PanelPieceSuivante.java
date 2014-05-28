@@ -41,6 +41,10 @@ public class PanelPieceSuivante extends JPanel
 
     }
 
+     public void setTaille(int largeur, int hauteur)
+    {this.setPreferredSize(new Dimension(largeur,hauteur));
+    }
+    
     private void build()
     {
         //Panels contenant les grilles
@@ -80,9 +84,9 @@ public class PanelPieceSuivante extends JPanel
         }
     }
 
-    public void afficherPiecesSuivantes(ArrayList<PieceDeTetris> piecesSuivantes)
+    public void afficherPiecesSuivantes(ArrayList<PieceDeTetris> piecesSuivantes, int nbPiece)
     {
-        for (int j = 0; j < casesSuivantes.size(); j++)
+        for (int j = 0; j < nbPiece; j++)
         {
             for (int i = 0; i < piecesSuivantes.get(j).getlisteBlocs().size(); i++)
             {

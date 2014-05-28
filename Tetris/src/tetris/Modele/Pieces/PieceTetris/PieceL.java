@@ -25,15 +25,15 @@ public class PieceL extends PieceDeTetris {
         super(largeur, hauteur);
 
         // positionnement du centre de rotation sur le repere
-        Position p = new Position(0, largeur / 2);
+        Position p = new Position(0, (largeur / 2)-1);
 
         // Indication de l'index du bloc de rotation
         numBlocRotation = 1;
         // Fabrication des Bloc de la piece L
+        listeBloc.add(new Bloc(p.getX(), p.getY()-1, getCouleurDefaut()));
         listeBloc.add(new Bloc(p.getX(), p.getY(), getCouleurDefaut()));
-        listeBloc.add(new Bloc(p.getX(), p.getY() + 1, getCouleurDefaut()));
-        listeBloc.add(new Bloc(p.getX(), p.getY() + 2, getCouleurDefaut()));
-        listeBloc.add(new Bloc(p.getX() + 1, p.getY(), getCouleurDefaut()));
+        listeBloc.add(new Bloc(p.getX(), p.getY()+1, getCouleurDefaut()));
+        listeBloc.add(new Bloc(p.getX() + 1, p.getY()-1, getCouleurDefaut()));
 
         //posRotation = new Position(p.getX(), p.getY() + 1);// enlever
     }

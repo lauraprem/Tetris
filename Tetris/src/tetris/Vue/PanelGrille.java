@@ -58,6 +58,8 @@ public class PanelGrille extends JPanel
 
     }
 
+    
+    
     private void build()
     {
         Border whiteline = BorderFactory.createLineBorder(Color.WHITE, 1);
@@ -81,7 +83,11 @@ public class PanelGrille extends JPanel
         }
     }
     
-    public void effacerCases()
+    public void setTaille(int largeur, int hauteur)
+    {this.setPreferredSize(new Dimension(largeur,hauteur));
+    }
+    
+    public synchronized void effacerCases()
     {
         for (int i = 0; i < NB_CASE_COLONE; i++)
         {
@@ -92,7 +98,7 @@ public class PanelGrille extends JPanel
         }
     }
     
-    public void effacerPiece(PieceDeTetris piecePrec ){
+    public synchronized void effacerPiece(PieceDeTetris piecePrec ){
      for (int i = 0; i < piecePrec.getlisteBlocs().size(); i++)
         {
             if (piecePrec.getBlocPosX(i) >= 0 && piecePrec.getBlocPosY(i) >= 0 && piecePrec.getBlocPosX(i) < NB_CASE_COLONE && piecePrec.getBlocPosY(i) < NB_CASE_LIGNE)
@@ -102,7 +108,7 @@ public class PanelGrille extends JPanel
         }
     }
     
-    public void afficherPiece(PieceDeTetris pieceCourante)
+    public synchronized void afficherPiece(PieceDeTetris pieceCourante)
     {
          for (int i = 0; i < pieceCourante.getlisteBlocs().size(); i++)
         {
@@ -113,7 +119,7 @@ public class PanelGrille extends JPanel
         }
     }
     
-    public void afficherBlocsFixes(ArrayList<Bloc> blocEnJEu)
+    public synchronized void afficherBlocsFixes(ArrayList<Bloc> blocEnJEu)
     {
          for (int i = 0; i <blocEnJEu.size(); i++)
         {

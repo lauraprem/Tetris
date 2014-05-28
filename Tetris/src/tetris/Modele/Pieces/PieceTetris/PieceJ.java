@@ -25,7 +25,7 @@ public class PieceJ extends PieceDeTetris {
         super(largeur, hauteur);
 
         // positionnement du centre de rotation sur le repere
-        Position p = new Position(0, largeur / 2);
+        Position p = new Position(0, (largeur / 2)-2);
 
         // Indication de l'index du bloc de rotation
         numBlocRotation = 1;

@@ -2,6 +2,8 @@ package tetris.Modele.Pieces;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Représente une <b>Piece de Tetris</b>
@@ -16,13 +18,13 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
      * piece
      */
     protected int numBlocRotation;
-    
+
     /**
-     * 
+     *
      */
     protected int hauteur;
     protected int largeur;
-    
+
     // CONSTRUCTEURS
     /**
      * <b>Constructeur<\b> par defaut
@@ -110,40 +112,58 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
             }
         }
     }
-    
-    /**
-     *  <b>Méthode<\b> place la pièce la plus haute à gauche en x = 0 et y = 0
-     * @return 
-     */
-    public ArrayList<Bloc> getPieceAOrigine(){////////////////////////////////////////mettre dans classe + generale
-        ArrayList<Bloc> listeBloc2 = (ArrayList<Bloc>) listeBloc.clone();
-        if(listeBloc2 != null) {
-            int numBloc = getBlocPosPlusHautGauche();
-            for (int i = 0; i < listeBloc2.size(); i++) {
-                if (!listeBloc2.get(numBloc).equals(listeBloc2.get(i))) {
-                    int x = listeBloc2.get(i).getPosition().getX();
-                    int y = listeBloc2.get(i).getPosition().getY();
-                    int deltax = Math.abs(listeBloc2.get(numBloc).getX() - x);
-                    int deltay = Math.abs(listeBloc2.get(numBloc).getY() - y);
 
-                    Position p = new Position(deltax,deltay);
-                    listeBloc2.get(i).setPosition(p);
-                }
+    /**
+     * <b>Méthode<\b> place la pièce la plus haute à gauche en x = 0 et y = 0
+     *
+     * @return
+     */
+    public ArrayList<Bloc> getPieceAOrigine() {////////////////////////////////////////mettre dans classe + generale
+        ArrayList<Bloc> listeBloc2 = new ArrayList<Bloc>();
+        for (int i = 0; i < listeBloc.size(); i++) {
+            try {
+                listeBloc2.add((Bloc) listeBloc.get(i).clone());
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(PieceDeTetris.class.getName()).log(Level.SEVERE, null, ex);
             }
-            // cas bloc qui se trouve le plus en haut a gauche
-            Position p = new Position(0,0);
-            listeBloc2.get(numBloc).setPosition(p);
+        }
+        if (!listeBloc2.isEmpty()) {
+            int numBlocY = getBlocPosPlusGauche();
+            int numBlocX = getBlocPosPlusHaut();
+            int deltay = largeur - (largeur - listeBloc2.get(numBlocY).getY());
+            int deltax = hauteur - (hauteur - listeBloc2.get(numBlocX).getX());
+            for (int i = 0; i < listeBloc2.size(); i++) {
+                int x = listeBloc2.get(i).getPosition().getX();
+                int y = listeBloc2.get(i).getPosition().getY();
+
+                Position p = new Position(x - deltax, y - deltay);
+                listeBloc2.get(i).setPosition(p);
+            }
         }
         return listeBloc2;
     }
-    private int getBlocPosPlusHautGauche(){
+
+    private int getBlocPosPlusGauche() {
         int numBloc = -1;
-        if(listeBloc.size()!=0){
+        if (!listeBloc.isEmpty()) {
+            numBloc = 0;
+            int y = listeBloc.get(0).getY();
+            for (int i = 1; i < listeBloc.size(); i++) {
+                if (listeBloc.get(i).getY() < y) {
+                    numBloc = i;
+                }
+            }
+        }
+        return numBloc;
+    }
+
+    private int getBlocPosPlusHaut() {
+        int numBloc = -1;
+        if (!listeBloc.isEmpty()) {
             numBloc = 0;
             int x = listeBloc.get(0).getX();
-            int y = listeBloc.get(0).getY();
-            for(int i = 1; i< listeBloc.size();i++){
-                if((listeBloc.get(i).getX()<x) &&  (listeBloc.get(i).getY()<y)){
+            for (int i = 1; i < listeBloc.size(); i++) {
+                if (listeBloc.get(i).getX() < x) {
                     numBloc = i;
                 }
             }

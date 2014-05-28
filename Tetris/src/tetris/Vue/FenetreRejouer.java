@@ -29,11 +29,12 @@ import tetris.Modele.JeuDeTetris;
 public class FenetreRejouer extends JFrame
 {
 
-    private final int HAUTEUR_TOTAL = 200;
+    private final int HAUTEUR_TOTAL = 300;
     private final int LARGEUR_TOTAL = 400;
     private String partieTermine;
 
-    private JButton rejouerButton;
+    private JButton rejouerButtonModeA;
+    private JButton rejouerButtonModeB;
     private JButton quitterButton;
 
     private JeuDeTetris tetris;
@@ -48,13 +49,13 @@ public class FenetreRejouer extends JFrame
         jeu = j;
         this.setTitle("Tetris");
         this.setSize(LARGEUR_TOTAL, HAUTEUR_TOTAL);
-        //  this.setResizable(false);
         this.setFocusable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         partieTermine = "Vous avez perdu !! Voulez-vous rejouer ?";
-        rejouerButton = new JButton("Rejouer  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
-        quitterButton =  new JButton("Retour au menu  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+        rejouerButtonModeA = new JButton("Rejouer en mode A  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+        rejouerButtonModeB = new JButton("Rejouer en mode B  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+        quitterButton = new JButton("Retour au menu  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
         build();
 
         addWindowListener(new WindowAdapter()
@@ -63,7 +64,6 @@ public class FenetreRejouer extends JFrame
             public void windowClosing(WindowEvent arg0)
             {
                 super.windowClosing(arg0);
-                // System.exit(0);
             }
         });
     }
@@ -80,11 +80,17 @@ public class FenetreRejouer extends JFrame
         text.setForeground(Color.WHITE);
         text.setAlignmentX(CENTER_ALIGNMENT);
 
-        rejouerButton.setAlignmentX(CENTER_ALIGNMENT);
-        rejouerButton.setBackground(Color.red);
-        rejouerButton.setAlignmentX(CENTER_ALIGNMENT);
-        rejouerButton.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
-        rejouerButton.addActionListener(new RejouerListener());
+        rejouerButtonModeA.setAlignmentX(CENTER_ALIGNMENT);
+        rejouerButtonModeA.setBackground(Color.red);
+        rejouerButtonModeA.setAlignmentX(CENTER_ALIGNMENT);
+        rejouerButtonModeA.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
+        rejouerButtonModeA.addActionListener(new RejouerAListener());
+
+        rejouerButtonModeB.setAlignmentX(CENTER_ALIGNMENT);
+        rejouerButtonModeB.setBackground(Color.red);
+        rejouerButtonModeB.setAlignmentX(CENTER_ALIGNMENT);
+        rejouerButtonModeB.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
+        rejouerButtonModeB.addActionListener(new RejouerBListener());
 
         quitterButton.setAlignmentX(CENTER_ALIGNMENT);
         quitterButton.setBackground(Color.red);
@@ -95,13 +101,15 @@ public class FenetreRejouer extends JFrame
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         principalPanel.add(text);
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        principalPanel.add(rejouerButton);
+        principalPanel.add(rejouerButtonModeA);
+        principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        principalPanel.add(rejouerButtonModeB);
         principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         principalPanel.add(quitterButton);
 
     }
 
-    class RejouerListener implements ActionListener
+    class RejouerAListener implements ActionListener
     {
 
         //Redéfinition de la méthode actionPerformed()
@@ -116,6 +124,23 @@ public class FenetreRejouer extends JFrame
         }
 
     }
+      class RejouerBListener implements ActionListener
+    {
+
+        //Redéfinition de la méthode actionPerformed()
+        @Override
+        public void actionPerformed(ActionEvent arg0)
+        {
+            tetris.rejouer();
+            tetris.genererLignesAlea(10);
+            rejouer = true;
+            jeu.reveil();
+            dispose();
+
+        }
+
+    }
+
 
     class QuitterListener implements ActionListener
     {

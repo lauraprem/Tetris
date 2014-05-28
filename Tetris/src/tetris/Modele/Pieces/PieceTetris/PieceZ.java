@@ -25,7 +25,7 @@ public class PieceZ extends PieceDeTetris {
         super(largeur, hauteur);
 
         // positionnement du centre de rotation sur le repere
-        Position p = new Position(0, largeur / 2);
+        Position p = new Position(0, (largeur / 2)-1);
 
         // Indication de l'index du bloc de rotation
         numBlocRotation = 1;
@@ -35,8 +35,6 @@ public class PieceZ extends PieceDeTetris {
         listeBloc.add(new Bloc(p.getX(), p.getY(), getCouleurDefaut()));
         listeBloc.add(new Bloc(p.getX() + 1, p.getY(), getCouleurDefaut()));
         listeBloc.add(new Bloc(p.getX() + 1, p.getY() + 1, getCouleurDefaut()));
-        
-        //posRotation = new Position(p.getX(), p.getY());// enlever
     }
 
     // METHODE
