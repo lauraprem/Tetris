@@ -2,6 +2,7 @@ package tetris.Controleur;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import static tetris.Modele.Action.*;
 import tetris.Modele.JeuDeTetris;
 
 /**
@@ -30,10 +31,10 @@ public class ControleurClavier extends Controleur implements KeyListener {
         System.out.println("Code touche pressée : " + event.getKeyCode());
         switch (event.getKeyCode()) {
             case KeyEvent.VK_Q: // déplacement à gauche
-                modele.deplacerPiece(event.getKeyCode());
+                modele.deplacerPiece(DEPLACEMENT_G);
                 break;
             case KeyEvent.VK_D: // déplacement à droite
-                modele.deplacerPiece(event.getKeyCode());
+                modele.deplacerPiece(DEPLACEMENT_D);
                 break;
             case KeyEvent.VK_SPACE: // met en pause le jeu
                 modele.gestionEnPause();
@@ -52,10 +53,10 @@ public class ControleurClavier extends Controleur implements KeyListener {
 
         switch (event.getKeyCode()) {
             case KeyEvent.VK_K: //rotation vers le gauche
-                modele.deplacerPiece(event.getKeyCode());
+                modele.deplacerPiece(ROTATION_G);
                 break;
             case KeyEvent.VK_M: //rotation vers la droite
-                modele.deplacerPiece(event.getKeyCode());
+                modele.deplacerPiece(ROTATION_D);
                 break;
             case KeyEvent.VK_L:  // ralentir la vitesse de la chute des blocs
                 modele.decelerer();
