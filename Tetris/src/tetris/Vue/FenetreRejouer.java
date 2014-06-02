@@ -9,6 +9,7 @@ import tetris.Vue.FenetresJeu.FenetreJeu;
 import java.awt.Color;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -29,168 +30,63 @@ import tetris.Modele.JeuDeTetris;
  *
  * @author leclerc
  */
-public class FenetreRejouer extends JFrame
-{
+public class FenetreRejouer extends JFrame {
 
-    private final int HAUTEUR_TOTAL = 250;
-    private final int LARGEUR_TOTAL = 400;
+    private final int HAUTEUR_TOTAL = 120;
+    private final int LARGEUR_TOTAL = 250;
     private String partieTermine;
 
-    private JButton rejouerButtonModeA;
-    private JButton rejouerButtonModeB;
-    private JButton quitterButton;
+    private JButton ButtonOk;
 
-    private JFormattedTextField nbligne;
-
-    private JeuDeTetris tetris;
-    private FenetreJeu jeu;
-
-    private boolean rejouer;
-
-    public FenetreRejouer(JeuDeTetris t, FenetreJeu j)
-    {
-        super();
-        if (t != null)
-        {
-            tetris = t;
-        }
-        if (j != null)
-        {
-            jeu = j;
-        }
-        this.setTitle("Tetris");
+    public FenetreRejouer(JeuDeTetris t, FenetreJeu j) {
+        this.setTitle("Tetris : Fin partie");
         this.setSize(LARGEUR_TOTAL, HAUTEUR_TOTAL);
         this.setFocusable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        partieTermine = "Partie terminée !! Voulez-vous rejouer ?";
-        rejouerButtonModeA = new JButton("Rejouer en mode A  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
-        rejouerButtonModeB = new JButton("Rejouer en mode B  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
-        quitterButton = new JButton("Retour au menu  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
-        nbligne = new JFormattedTextField(NumberFormat.getIntegerInstance());
- nbligne.setBackground(Color.BLACK);
-        nbligne.setBorder(BorderFactory.createLineBorder(Color.red, 1));
-        nbligne.setForeground(Color.white);
+        partieTermine = "Partie terminée !!!!";
+        ButtonOk = new JButton("Retour au menu  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
         build();
 
-        addWindowListener(new WindowAdapter()
-        {
+        addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent arg0)
-            {
-                super.windowClosing(arg0);
+            public void windowClosing(WindowEvent arg0) {
+                dispose();
             }
         });
     }
 
-    private void build()
-    {
+    private void build() {
+        // Panel principal
         JPanel principalPanel = new JPanel();
         principalPanel.setLayout(new BoxLayout(principalPanel, BoxLayout.Y_AXIS));
         principalPanel.setBackground(Color.BLACK);
         this.add(principalPanel);
 
+        // Message
         JLabel text = new JLabel(partieTermine);
+        text.setFont(new Font("Arial", Font.BOLD, 20));
+        text.setPreferredSize(new Dimension(100, 200));
         text.setBackground(Color.BLACK);
         text.setForeground(Color.WHITE);
+        text.setAlignmentY(TOP_ALIGNMENT);
         text.setAlignmentX(CENTER_ALIGNMENT);
-
-        rejouerButtonModeA.setAlignmentX(CENTER_ALIGNMENT);
-        rejouerButtonModeA.setBackground(Color.red);
-        rejouerButtonModeA.setAlignmentX(CENTER_ALIGNMENT);
-        rejouerButtonModeA.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
-        rejouerButtonModeA.addActionListener(new RejouerAListener());
-
-        rejouerButtonModeB.setAlignmentX(CENTER_ALIGNMENT);
-        rejouerButtonModeB.setBackground(Color.red);
-        rejouerButtonModeB.setAlignmentX(CENTER_ALIGNMENT);
-        rejouerButtonModeB.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
-        rejouerButtonModeB.addActionListener(new RejouerBListener());
-
-        quitterButton.setAlignmentX(CENTER_ALIGNMENT);
-        quitterButton.setBackground(Color.red);
-        quitterButton.setAlignmentX(CENTER_ALIGNMENT);
-        quitterButton.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
-        quitterButton.addActionListener(new QuitterListener());
-
-        principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         principalPanel.add(text);
-        principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        principalPanel.add(rejouerButtonModeA);
-        principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        principalPanel.add(rejouerButtonModeB);
-        principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        principalPanel.add(nbligne);
-        principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-      //  principalPanel.add(quitterButton);
 
+        // Bouton OK
+        ButtonOk.setBackground(Color.red);
+        ButtonOk.setAlignmentY(BOTTOM_ALIGNMENT);
+        ButtonOk.setAlignmentX(CENTER_ALIGNMENT);
+        ButtonOk.setBorder(BorderFactory.createLineBorder(new Color(150, 0, 0), 5));
+        ButtonOk.addActionListener(new QuitterListener());
+        principalPanel.add(ButtonOk);
     }
 
-    class RejouerAListener implements ActionListener
-    {
+    class QuitterListener implements ActionListener {
 
-        //Redéfinition de la méthode actionPerformed()
         @Override
-        public void actionPerformed(ActionEvent arg0)
-        {
-            if (tetris != null || jeu != null)
-            {
-                tetris.rejouer();
-                rejouer = true;
-                jeu.reveil();
-                dispose();
-            }
-
-        }
-
-    }
-
-    class RejouerBListener implements ActionListener
-    {
-
-        //Redéfinition de la méthode actionPerformed()
-        @Override
-        public void actionPerformed(ActionEvent arg0)
-        {
-            if (tetris != null || jeu != null)
-            {
-                tetris.rejouer();
-                int nb;
-                if (nbligne.getText().length()>0 && Integer.parseInt(nbligne.getText()) < 20)
-                {
-                    nb = Integer.parseInt(nbligne.getText());
-                } else
-                {
-                    nb = 10;
-                }
-                tetris.genererLignesAlea(nb);
-                rejouer = true;
-                jeu.reveil();
-                dispose();
-            }
-        }
-
-    }
-
-    class QuitterListener implements ActionListener
-    {
-
-        //Redéfinition de la méthode actionPerformed()
-        @Override
-        public void actionPerformed(ActionEvent arg0)
-        {
-            
-            tetris.setMep(true);
-            rejouer = false;
-            jeu.reveil();
+        public void actionPerformed(ActionEvent arg0) {
             dispose();
-            
         }
-
-    }
-
-    public boolean getRejouer()
-    {
-        return rejouer;
     }
 }

@@ -29,7 +29,7 @@ public class LecteurSon {
         try {
               File file = new File(f);
             bach = Applet.newAudioClip(file.toURI().toURL());
-        } catch (MalformedURLException ex) {
+        } catch (Exception ex) { //MalformedURLException
             bach = null;
             Logger.getLogger(LecteurSon.class.getName()).log(Level.SEVERE, null, ex);
         }

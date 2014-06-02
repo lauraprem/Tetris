@@ -91,7 +91,6 @@ public class PanelPieceSuivante extends JPanel
         {
             for (int i = 0; i < piecesSuivantes.get(j).getPieceAOrigine().size(); i++)
             {
-                
                 casesSuivantes.get(j)[piecesSuivantes.get(j).getPieceAOrigine().get(i).getX() ][piecesSuivantes.get(j).getPieceAOrigine().get(i).getY()].setBackground(piecesSuivantes.get(j).getPieceAOrigine().get(i).getCouleur());
             }
         }

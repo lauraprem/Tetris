@@ -162,12 +162,10 @@ public class FenetreAccueil extends JFrame
     
       class Commencer2JoueurListener implements ActionListener
     {
-
         //Redéfinition de la méthode actionPerformed()
         @Override
         public void actionPerformed(ActionEvent arg0)
         {
-            
                 JeuDeTetris2Joueurs modele1 = new JeuDeTetris2Joueurs();
                 JeuDeTetris2Joueurs modele2 = new JeuDeTetris2Joueurs();
                 FenetreJeu vue1 = new FenetreJeu(modele1);
@@ -175,24 +173,19 @@ public class FenetreAccueil extends JFrame
                 Fenetre2Joueur vue = new Fenetre2Joueur(vue1, vue2);
                 Controleur2Joueur controleur = new Controleur2Joueur(modele1,modele2,vue);
                 vue.setVisible(true);
-            
-            
         }
         
     }
     
     class AideListener implements ActionListener
     {
-
         //Redéfinition de la méthode actionPerformed()
         @Override
         public void actionPerformed(ActionEvent arg0)
         {
             FenetreAide f = new FenetreAide();
             f.setVisible(true);
-            
         }
-        
     }
     
 }

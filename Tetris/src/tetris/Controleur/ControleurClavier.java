@@ -39,7 +39,7 @@ public class ControleurClavier extends Controleur implements KeyListener {
             case KeyEvent.VK_SPACE: // met en pause le jeu
                 modele.gestionEnPause();
                 break;
-            case KeyEvent.VK_L: // accélerer la vitesse de la chute des blocs
+            case KeyEvent.VK_DOWN: // accélerer la vitesse de la chute des blocs
                 modele.accelerer();
                 break;
             default:
@@ -52,13 +52,13 @@ public class ControleurClavier extends Controleur implements KeyListener {
         System.out.println("Code touche relaché : " + event.getKeyCode());
 
         switch (event.getKeyCode()) {
-            case KeyEvent.VK_K: //rotation vers le gauche
+            case KeyEvent.VK_LEFT: //rotation vers le gauche
                 modele.deplacerPiece(ROTATION_G);
                 break;
-            case KeyEvent.VK_M: //rotation vers la droite
+            case KeyEvent.VK_RIGHT: //rotation vers la droite
                 modele.deplacerPiece(ROTATION_D);
                 break;
-            case KeyEvent.VK_L:  // ralentir la vitesse de la chute des blocs
+            case KeyEvent.VK_DOWN:  // ralentir la vitesse de la chute des blocs
                 modele.decelerer();
             default:
                 break;

@@ -26,8 +26,7 @@ import tetris.Vue.Menu;
  *
  * @author leclerc
  */
-public class FenetreJeu extends JFrame implements Observer
-{
+public class FenetreJeu extends JFrame implements Observer {
 
     private int HAUTEUR_TOTAL;
     private int LARGEUR_TOTAL;
@@ -43,8 +42,7 @@ public class FenetreJeu extends JFrame implements Observer
 
     private LecteurSon l;
 
-    public FenetreJeu(JeuDeTetris t)
-    {
+    public FenetreJeu(JeuDeTetris t) {
         super();
         scorePanel = new PanelScore();
         grillePanel = new PanelGrille();
@@ -64,14 +62,11 @@ public class FenetreJeu extends JFrame implements Observer
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         build();
 
-        addWindowListener(new WindowAdapter()
-        {
+        addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent arg0)
-            {
+            public void windowClosing(WindowEvent arg0) {
                 tetris.gestionEnPause();
-                if (l != null)
-                {
+                if (l != null) {
                     l.stopper();
                 }
                 dispose();
@@ -79,15 +74,13 @@ public class FenetreJeu extends JFrame implements Observer
         });
     }
 
-    public void setTaille(int largeur, int hauteur)
-    {
+    public void setTaille(int largeur, int hauteur) {
         HAUTEUR_TOTAL = hauteur;
         LARGEUR_TOTAL = largeur;
         this.setSize(LARGEUR_TOTAL, HAUTEUR_TOTAL);
     }
 
-    private void build()
-    {
+    private void build() {
 
         //Panel principal
         principalPanel = new JPanel(new BorderLayout());
@@ -102,100 +95,63 @@ public class FenetreJeu extends JFrame implements Observer
 
         pieceSuivantePanel.afficherPiecesSuivantes(tetris.getPiecesSuivantes(), menu.getNombrePieceAfficher());
 
-        menu.getSousmenu0().addActionListener(new MyRadioButtonMenuItem());
         menu.getSousmenu0().addItemListener(new MyRadioButtonMenuItem());
-        menu.getSousmenu1().addActionListener(new MyRadioButtonMenuItem());
         menu.getSousmenu1().addItemListener(new MyRadioButtonMenuItem());
-        menu.getSousmenu2().addActionListener(new MyRadioButtonMenuItem());
         menu.getSousmenu2().addItemListener(new MyRadioButtonMenuItem());
-        menu.getSousmenu3().addActionListener(new MyRadioButtonMenuItem());
         menu.getSousmenu3().addItemListener(new MyRadioButtonMenuItem());
-        menu.getSousmenu4().addActionListener(new MyRadioButtonMenuItem());
         menu.getSousmenu4().addItemListener(new MyRadioButtonMenuItem());
         principalPanel.add(menu, BorderLayout.PAGE_START);
-        if (!tetris.getBlocEnJeu().isEmpty())
-        {
+        if (!tetris.getBlocEnJeu().isEmpty()) {
             grillePanel.afficherBlocsFixes(tetris.getBlocEnJeu());
         }
 
         l.jouerAvecRepetition();
-
     }
 
-    public JPanel getPrincipalPanel()
-    {
+    public JPanel getPrincipalPanel() {
         return principalPanel;
     }
 
-    public synchronized void reveil()
-    {
+    public synchronized void reveil() {
         this.notify();
 
     }
 
     @Override
-    public void update(Observable o, Object arg)
-    {
-        synchronized (this)
-        {
-            PieceDeTetris piecePrec = tetris.getFantome();
-            PieceDeTetris pieceCour = tetris.getPieceCourante();
-            ArrayList<Bloc> blocsEnJeu = tetris.getBlocEnJeu();
-            ArrayList<PieceDeTetris> piecesSuivantes = tetris.getPiecesSuivantes();
+    public void update(Observable o, Object arg) {
 
-            int score = tetris.getScore().getPoint();
-            int niveau = tetris.getScore().getNiveau();
+        if (tetris.isTermine()) {
+            if (l != null) {
+                l.stopper();
+            }
+            FenetreRejouer f = new FenetreRejouer(tetris, this);
+            f.setVisible(true);
+            tetris.gestionEnPause();
+            dispose();
+        } else {
+            synchronized (this) {
+                PieceDeTetris piecePrec = tetris.getFantome();
+                PieceDeTetris pieceCour = tetris.getPieceCourante();
+                ArrayList<Bloc> blocsEnJeu = tetris.getBlocEnJeu();
+                ArrayList<PieceDeTetris> piecesSuivantes = tetris.getPiecesSuivantes();
 
-            if (tetris.isTermine())
-            {
-
-                FenetreRejouer f = new FenetreRejouer(tetris, this);
-                f.setVisible(true);
-                synchronized (this)
+                int score = tetris.getScore().getPoint();
+                int niveau = tetris.getScore().getNiveau();
+                if (tetris.isCollision())//|| (( tetris.getClass() == JeuDeTetris2Joueurs.class ) &&((JeuDeTetris2Joueurs)tetris.isSupprLigne())))
                 {
-                    try
-                    {
-                        this.wait();
-                    } catch (InterruptedException ex)
-                    {
-                        System.err.println(ex.getMessage());
-                    }
-
-                    if (!f.getRejouer())
-                    {
-                        if (l != null)
-                        {
-                            l.stopper();
-                        }
-                        dispose();
-                    }
-
-                    piecePrec = tetris.getFantome();
-                    pieceCour = tetris.getPieceCourante();
-                    blocsEnJeu = tetris.getBlocEnJeu();
-                    piecesSuivantes = tetris.getPiecesSuivantes();
-
-                    score = tetris.getScore().getPoint();
-                    niveau = tetris.getScore().getNiveau();
                     rafraichirAffichage(blocsEnJeu, piecesSuivantes, niveau, score);
                 }
-            }
-            if (tetris.isCollision())//|| (( tetris.getClass() == JeuDeTetris2Joueurs.class ) &&((JeuDeTetris2Joueurs)tetris.isSupprLigne())))
-            {
-                rafraichirAffichage(blocsEnJeu, piecesSuivantes, niveau, score);
-            }
+                //Effacer la trace
+                grillePanel.effacerPiece(piecePrec);
 
-            //Effacer la trace
-            grillePanel.effacerPiece(piecePrec);
-
-            //afficher la piece courante
-            grillePanel.afficherPiece(pieceCour);
+                //afficher la piece courante
+                grillePanel.afficherPiece(pieceCour);
+            }
         }
 
     }
 
-    public synchronized void rafraichirAffichage(ArrayList<Bloc> blocsEnJeu, ArrayList<PieceDeTetris> piecesSuivantes, int niveau, int score)
-    {
+    public synchronized void rafraichirAffichage(ArrayList<Bloc> blocsEnJeu, ArrayList<PieceDeTetris> piecesSuivantes, int niveau, int score) {
         //effacer les cases
         grillePanel.effacerCases();
 
@@ -212,98 +168,69 @@ public class FenetreJeu extends JFrame implements Observer
 
     }
 
-    class MenuListener implements ActionListener
-    {
+    class MenuListener implements ActionListener {
 
-        //Redéfinition de la méthode actionPerformed()
         @Override
-        public synchronized void actionPerformed(ActionEvent arg0)
-        {
+        public synchronized void actionPerformed(ActionEvent arg0) {
             pieceSuivantePanel.afficherPiecesSuivantes(tetris.getPiecesSuivantes(), menu.getNombrePieceAfficher());
         }
-
     }
 
     class MyRadioButtonMenuItem extends JRadioButtonMenuItem
-            implements ActionListener, ItemListener
-    {
+            implements ItemListener {
 
         @Override
-        public synchronized void actionPerformed(ActionEvent e)
-        {
-            System.out.println(" ");
-        }
-
-        @Override
-        public void itemStateChanged(ItemEvent e)
-        {
-            System.out.println("State changed: ");
+        public void itemStateChanged(ItemEvent e) {
             int nb;
-            if (e.getItem().equals(menu.getSousmenu0()))
-            {
+            if (e.getItem().equals(menu.getSousmenu0())) {
                 nb = 0;
-            } else if (e.getItem().equals(menu.getSousmenu1()))
-            {
+            } else if (e.getItem().equals(menu.getSousmenu1())) {
                 nb = 1;
-            } else if (e.getItem().equals(menu.getSousmenu2()))
-            {
+            } else if (e.getItem().equals(menu.getSousmenu2())) {
                 nb = 2;
-            } else if (e.getItem().equals(menu.getSousmenu3()))
-            {
+            } else if (e.getItem().equals(menu.getSousmenu3())) {
                 nb = 3;
-            } else
-            {
+            } else {
                 nb = 4;
             }
+            pieceSuivantePanel.effacerGrilles();
             pieceSuivantePanel.afficherPiecesSuivantes(tetris.getPiecesSuivantes(), nb);
-
         }
-
     }
 
-    public PanelScore getScorePanel()
-    {
+    public PanelScore getScorePanel() {
         return scorePanel;
     }
 
-    public void setScorePanel(PanelScore scorePanel)
-    {
+    public void setScorePanel(PanelScore scorePanel) {
         this.scorePanel = scorePanel;
     }
 
-    public PanelGrille getGrillePanel()
-    {
+    public PanelGrille getGrillePanel() {
         return grillePanel;
     }
 
-    public void setGrillePanel(PanelGrille grillePanel)
-    {
+    public void setGrillePanel(PanelGrille grillePanel) {
         this.grillePanel = grillePanel;
     }
 
-    public PanelPieceSuivante getPieceSuivantePanel()
-    {
+    public PanelPieceSuivante getPieceSuivantePanel() {
         return pieceSuivantePanel;
     }
 
-    public void setPieceSuivantePanel(PanelPieceSuivante pieceSuivantePanel)
-    {
+    public void setPieceSuivantePanel(PanelPieceSuivante pieceSuivantePanel) {
         this.pieceSuivantePanel = pieceSuivantePanel;
     }
 
-    public JeuDeTetris getTetris()
-    {
+    public JeuDeTetris getTetris() {
         return tetris;
     }
 
-    public LecteurSon getL()
-    {
+    public LecteurSon getL() {
         return l;
     }
 
-    public void setL(LecteurSon l)
-    {
+    public void setL(LecteurSon l) {
         this.l = l;
     }
-
 }
