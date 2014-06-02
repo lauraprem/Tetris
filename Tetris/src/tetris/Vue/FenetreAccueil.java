@@ -125,7 +125,7 @@ public class FenetreAccueil extends JFrame
         @Override
         public void actionPerformed(ActionEvent arg0)
         {
-            tetris.rejouer();
+            tetris = new JeuDeTetris();
             FenetreJeu f = new FenetreJeu(tetris);
             f.setVisible(true);
             
@@ -141,7 +141,7 @@ public class FenetreAccueil extends JFrame
         @Override
         public void actionPerformed(ActionEvent arg0)
         {
-            tetris.rejouer();
+            tetris= new JeuDeTetris();
             int nb;
             if (nbligne.getText().length()>0 && Integer.parseInt(nbligne.getText()) < 20)
             {
