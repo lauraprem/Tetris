@@ -73,8 +73,8 @@ public class JeuDeTetrisMultiJoueur extends Observable implements Runnable
             }
             if (jeu1.isTermine() || jeu2.isTermine())
             {
-                jeu2.setTermine(true);
-                jeu1.setTermine(true);
+               /* jeu2.setTermine(true);
+                jeu1.setTermine(true);*/
                 setChanged();
                 notifyObservers();
             }
