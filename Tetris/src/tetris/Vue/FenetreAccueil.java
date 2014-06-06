@@ -12,10 +12,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -45,8 +50,7 @@ public class FenetreAccueil extends JFrame
     
     private JeuDeTetris tetris;
     
-    public FenetreAccueil(JeuDeTetris t)
-    {
+    public FenetreAccueil(JeuDeTetris t){
         super();
         tetris = t;
         this.setTitle("Tetris");
@@ -54,10 +58,10 @@ public class FenetreAccueil extends JFrame
         this.setResizable(false);
         this.setFocusable(false);
         this.setLocationRelativeTo(null);
-        commencer = new JButton("Commencer à jouer mode A   ", new ImageIcon("src/Contenu/Images/Tetris.png"));
-        info = new JButton("Voir les instructions   ", new ImageIcon("src/Contenu/Images/aide.png"));
-        commencerAlea = new JButton("Commencer à jouer mode B   ", new ImageIcon("src/Contenu/Images/Tetris.png"));
-        commencer2joueur = new JButton("Commencer à jouer à deux   ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+        commencer = new JButton("Commencer à jouer mode A   ",new ImageIcon(getClass().getResource("/Contenu/Images/Tetris.png")));
+        info = new JButton("Voir les instructions   ", new ImageIcon(getClass().getResource("/Contenu/Images/aide.png")));
+        commencerAlea = new JButton("Commencer à jouer mode B   ", new ImageIcon(getClass().getResource("/Contenu/Images/Tetris.png")));
+        commencer2joueur = new JButton("Commencer à jouer à deux   ", new ImageIcon(getClass().getResource("/Contenu/Images/Tetris.png")));
   
         nbligne = new JFormattedTextField(NumberFormat.getIntegerInstance());
         nbligne.setBackground(Color.BLACK);

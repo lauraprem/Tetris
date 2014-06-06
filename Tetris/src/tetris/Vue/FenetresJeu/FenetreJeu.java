@@ -48,7 +48,7 @@ public class FenetreJeu extends JFrame implements Observer {
         grillePanel = new PanelGrille();
         pieceSuivantePanel = new PanelPieceSuivante();
         menu = new Menu();
-        l = new LecteurSon("./src/Contenu/Musiques/tetris.wav");
+        l = new LecteurSon(getClass().getResource("/Contenu/Musiques/tetris.wav").toString());
         tetris = t;
 
         HAUTEUR_TOTAL = Toolkit.getDefaultToolkit().getScreenSize().height - 45;
@@ -119,17 +119,16 @@ public class FenetreJeu extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
-        if (tetris.isTermine()) {
-            if (l != null) {
-                l.stopper();
-            }
-            FenetreRejouer f = new FenetreRejouer(tetris, this);
-            f.setVisible(true);
-            tetris.gestionEnPause();
-            dispose();
-        } else {
-            synchronized (this) {
+            if (tetris.isTermine()) {
+                if (l != null) {
+                    l.stopper();
+                }
+                FenetreRejouer f = new FenetreRejouer(tetris, this);
+                f.setVisible(true);
+                tetris.gestionEnPause();
+                dispose();
+            } else {
+                        synchronized (this) {
                 PieceDeTetris piecePrec = tetris.getFantome();
                 PieceDeTetris pieceCour = tetris.getPieceCourante();
                 ArrayList<Bloc> blocsEnJeu = tetris.getBlocEnJeu();
@@ -148,7 +147,6 @@ public class FenetreJeu extends JFrame implements Observer {
                 grillePanel.afficherPiece(pieceCour);
             }
         }
-
     }
 
     public synchronized void rafraichirAffichage(ArrayList<Bloc> blocsEnJeu, ArrayList<PieceDeTetris> piecesSuivantes, int niveau, int score) {

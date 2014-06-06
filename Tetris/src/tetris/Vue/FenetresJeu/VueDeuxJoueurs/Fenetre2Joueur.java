@@ -100,26 +100,23 @@ public class Fenetre2Joueur extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-       
-            if (jeu1.getTetris().isTermine() || jeu2.getTetris().isTermine()) {
-                 if (jeu1.getTetris().isTermine()){
-                     jeu2.dispose();
-                 }
-                 if (jeu2.getTetris().isTermine()){
-                     jeu1.dispose();
-                 }
-                dispose();
-            } else {
-                 synchronized (this) {
-                boolean sup = ((JeuDeTetris2Joueurs) jeu2.getTetris()).isSupprLigne();
-                if (sup) {
+        if (jeu1.getTetris().isTermine() || jeu2.getTetris().isTermine()) {
+            if (jeu1.getTetris().isTermine()) {
+                jeu2.dispose();
+            }
+            if (jeu2.getTetris().isTermine()) {
+                jeu1.dispose();
+            }
+            dispose();
+        } else {
+            boolean sup = ((JeuDeTetris2Joueurs) jeu2.getTetris()).isSupprLigne();
+            if (sup) {
 
-                    jeu1.rafraichirAffichage(jeu1.getTetris().getBlocEnJeu(), jeu1.getTetris().getPiecesSuivantes(), jeu1.getTetris().getScore().getNiveau(), jeu1.getTetris().getScore().getPoint());
-                }
-                sup = ((JeuDeTetris2Joueurs) jeu1.getTetris()).isSupprLigne();
-                if (sup) {
-                    jeu2.rafraichirAffichage(jeu2.getTetris().getBlocEnJeu(), jeu2.getTetris().getPiecesSuivantes(), jeu2.getTetris().getScore().getNiveau(), jeu2.getTetris().getScore().getPoint());
-                }
+                jeu1.rafraichirAffichage(jeu1.getTetris().getBlocEnJeu(), jeu1.getTetris().getPiecesSuivantes(), jeu1.getTetris().getScore().getNiveau(), jeu1.getTetris().getScore().getPoint());
+            }
+            sup = ((JeuDeTetris2Joueurs) jeu1.getTetris()).isSupprLigne();
+            if (sup) {
+                jeu2.rafraichirAffichage(jeu2.getTetris().getBlocEnJeu(), jeu2.getTetris().getPiecesSuivantes(), jeu2.getTetris().getScore().getNiveau(), jeu2.getTetris().getScore().getPoint());
             }
         }
     }

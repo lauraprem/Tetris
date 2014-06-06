@@ -64,9 +64,9 @@ public class FenetreRejouer1 extends JFrame
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         partieTermine = "Partie terminée !! Voulez-vous rejouer ?";
-        rejouerButtonModeA = new JButton("Rejouer en mode A  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
-        rejouerButtonModeB = new JButton("Rejouer en mode B  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
-        quitterButton = new JButton("Retour au menu  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+        rejouerButtonModeA = new JButton("Rejouer en mode A  ", new ImageIcon(getClass().getResource("/Contenu/Images/Tetris.png")));
+        rejouerButtonModeB = new JButton("Rejouer en mode B  ", new ImageIcon(getClass().getResource("/Contenu/Images/Tetris.png")));
+        quitterButton = new JButton("Retour au menu  ", new ImageIcon(getClass().getResource("src/Contenu/Images/Tetris.png")));
         nbligne = new JFormattedTextField(NumberFormat.getIntegerInstance());
  nbligne.setBackground(Color.BLACK);
         nbligne.setBorder(BorderFactory.createLineBorder(Color.red, 1));

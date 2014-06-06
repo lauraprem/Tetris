@@ -10,6 +10,7 @@ import java.applet.Applet;
 import java.applet.AudioClip;
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,8 +28,7 @@ public class LecteurSon {
     
     public LecteurSon(String f) {
         try {
-              File file = new File(f);
-            bach = Applet.newAudioClip(file.toURI().toURL());
+            bach = Applet.newAudioClip(new URL(f));
         } catch (Exception ex) { //MalformedURLException
             bach = null;
             Logger.getLogger(LecteurSon.class.getName()).log(Level.SEVERE, null, ex);
