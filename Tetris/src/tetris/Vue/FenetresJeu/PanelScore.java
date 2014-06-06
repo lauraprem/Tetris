@@ -26,8 +26,8 @@ public class PanelScore extends JPanel
 
     private JLabel score;
     private JLabel niveau;
-    JLabel s;
-    JLabel n;
+    private JLabel s;
+    private JLabel n;
 
     public PanelScore()
     {
