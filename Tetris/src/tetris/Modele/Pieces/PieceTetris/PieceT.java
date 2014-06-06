@@ -22,7 +22,7 @@ public class PieceT extends PieceDeTetris {
      * @see Bloc
      */
     public PieceT(int largeur, int hauteur) {
-        super(largeur, hauteur);
+        super();
 
         // positionnement du centre de rotation sur le repere
         Position p = new Position(0, (largeur / 2)-1);

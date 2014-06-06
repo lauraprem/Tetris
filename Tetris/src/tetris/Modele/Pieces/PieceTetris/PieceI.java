@@ -28,10 +28,10 @@ public class PieceI extends PieceDeTetris {
      * @see Bloc
      */
     public PieceI(int largeur, int hauteur) {
-        super(largeur, hauteur);
+        super();
 
         // positionnement du centre de rotation sur le repere
-        Position p = new Position(0, (this.largeur / 2)-1);
+        Position p = new Position(0, (largeur / 2)-1);
 
         // Indication de l'index du bloc de rotation
         numBlocRotation = 1;

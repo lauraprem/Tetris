@@ -19,34 +19,13 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
      */
     protected int numBlocRotation;
 
-    /**
-     *
-     */
-    protected int hauteur;
-    protected int largeur;
-
     // CONSTRUCTEURS
     /**
      * <b>Constructeur<\b> par defaut
      */
     public PieceDeTetris() {
-        this(0, 0);
-    }
-
-    /**
-     * <b>Constructeur<\b> en fonction de la taille d'un repère, cela permet que
-     * l'on puissent construire les Blocs avec leur positions. Cela sert aussi
-     * prendre en compte le changement de repère lors de la rotation.
-     *
-     * @param largeur taille maximum de l'abscisse
-     * @param hauteur taille maximum de l'ordonnées
-     * @see Bloc
-     */
-    public PieceDeTetris(int largeur, int hauteur) {
         super();
         numBlocRotation = 0;
-        this.hauteur = hauteur;
-        this.largeur = largeur;
     }
 
     /**
@@ -101,8 +80,8 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
                     int y = listeBloc.get(i).getPosition().getY();
                     int deltax = listeBloc.get(numBlocRotation).getX() - x;
                     int deltay = listeBloc.get(numBlocRotation).getY() - y;
-                    int deltaLarg = Math.abs(largeur - (largeur - listeBloc.get(numBlocRotation).getX()));
-                    int deltaLong = Math.abs(hauteur - (hauteur - listeBloc.get(numBlocRotation).getY()));
+                    int deltaLarg = listeBloc.get(numBlocRotation).getX();
+                    int deltaLong = listeBloc.get(numBlocRotation).getY();
 
                     Position p = new Position(deltax * ((int) Math.round(Math.cos(degre))) - deltay * ((int) Math.round(Math.sin(degre))) + deltaLarg,
                             deltax * ((int) Math.round(Math.sin(degre))) + deltay * ((int) Math.round(Math.cos(degre))) + deltaLong);
@@ -130,8 +109,8 @@ public class PieceDeTetris extends PieceDeJeu implements Cloneable {
         if (!listeBloc2.isEmpty()) {
             int numBlocY = getBlocPosPlusGauche();
             int numBlocX = getBlocPosPlusHaut();
-            int deltay = largeur - (largeur - listeBloc2.get(numBlocY).getY());
-            int deltax = hauteur - (hauteur - listeBloc2.get(numBlocX).getX());
+            int deltay = listeBloc2.get(numBlocY).getY();
+            int deltax = listeBloc2.get(numBlocX).getX();
             for (int i = 0; i < listeBloc2.size(); i++) {
                 int x = listeBloc2.get(i).getPosition().getX();
                 int y = listeBloc2.get(i).getPosition().getY();

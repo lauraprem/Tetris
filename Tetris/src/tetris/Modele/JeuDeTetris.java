@@ -347,7 +347,7 @@ public class JeuDeTetris extends Observable implements Runnable {
      * @return vrai si la pièce a pu etre déplacée et faux sinon
      */
     public synchronized boolean deplacerPiece(ActionBloc sens) {
-        if (!isMep()) {
+       // if (!isMep()) {
 
             fantome = (PieceDeTetris) pieceCourante.clone();
 
@@ -360,10 +360,10 @@ public class JeuDeTetris extends Observable implements Runnable {
                     fantome.deplacerDroite(1);
                     break;
                 case ROTATION_G: //rotation vers le gauche
-                    fantome.rotationPiece(90);
+                    fantome.rotationPiece(-90);
                     break;
                 case ROTATION_D: //rotation vers la droite
-                    fantome.rotationPiece(-90);
+                    fantome.rotationPiece(90);
                     break;
                 default: //deplacement par defaut
                     fantome.deplacerBas(1);
@@ -382,9 +382,8 @@ public class JeuDeTetris extends Observable implements Runnable {
 
                 return true;
             }
-        }
+   //     }
 
-        //   }
         return false;
     }
 
