@@ -105,6 +105,7 @@ public class Fenetre2Joueur extends JFrame implements Observer {
                 jeu2.dispose();
             }
             if (jeu2.getTetris().isTermine()) {
+                jeu1.getL().stopper();
                 jeu1.dispose();
             }
             dispose();

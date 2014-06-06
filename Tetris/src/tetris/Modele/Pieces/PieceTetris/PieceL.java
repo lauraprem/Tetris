@@ -46,6 +46,6 @@ public class PieceL extends PieceDeTetris {
      */
     @Override
     public Color getCouleurDefaut() {
-        return Color.ORANGE;
+        return new Color(255, 153, 51);
     }
 }

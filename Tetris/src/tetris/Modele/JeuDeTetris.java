@@ -347,8 +347,7 @@ public class JeuDeTetris extends Observable implements Runnable {
      * @return vrai si la pièce a pu etre déplacée et faux sinon
      */
     public synchronized boolean deplacerPiece(ActionBloc sens) {
-       // if (!isMep()) {
-
+        if (!isMep()) {
             fantome = (PieceDeTetris) pieceCourante.clone();
 
             // Recherche de l'action futur à réaliser
@@ -382,7 +381,7 @@ public class JeuDeTetris extends Observable implements Runnable {
 
                 return true;
             }
-   //     }
+        }
 
         return false;
     }

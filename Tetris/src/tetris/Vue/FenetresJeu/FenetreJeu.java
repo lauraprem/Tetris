@@ -119,6 +119,7 @@ public class FenetreJeu extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        
             if (tetris.isTermine()) {
                 if (l != null) {
                     l.stopper();
@@ -128,7 +129,7 @@ public class FenetreJeu extends JFrame implements Observer {
                 tetris.gestionEnPause();
                 dispose();
             } else {
-                        synchronized (this) {
+              synchronized (this) {          
                 PieceDeTetris piecePrec = tetris.getFantome();
                 PieceDeTetris pieceCour = tetris.getPieceCourante();
                 ArrayList<Bloc> blocsEnJeu = tetris.getBlocEnJeu();

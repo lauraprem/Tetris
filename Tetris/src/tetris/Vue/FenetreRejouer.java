@@ -45,7 +45,7 @@ public class FenetreRejouer extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         partieTermine = "Partie terminée !!!!";
-        ButtonOk = new JButton("Retour au menu  ", new ImageIcon("src/Contenu/Images/Tetris.png"));
+        ButtonOk = new JButton("Retour au menu  ", new ImageIcon(getClass().getResource("/Contenu/Images/Tetris.png")));
         build();
 
         addWindowListener(new WindowAdapter() {
