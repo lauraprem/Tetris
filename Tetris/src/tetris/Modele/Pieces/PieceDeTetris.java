@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 /**
  * Représente une <b>Piece de Tetris</b>
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class PieceDeTetris extends PieceDeJeu implements Cloneable {
 
