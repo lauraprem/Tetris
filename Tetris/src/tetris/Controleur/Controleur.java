@@ -6,7 +6,7 @@ import tetris.Modele.JeuDeTetris;
  * Représente un <b>Controleur</b> : permet de regrouper les points communs avec
  * les tout les Controleurs
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class Controleur {
     // ATTRIBUT
