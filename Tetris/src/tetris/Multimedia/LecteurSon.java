@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * Représente un <b>lecteur de son</b>
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class LecteurSon {
     protected AudioClip bach;
