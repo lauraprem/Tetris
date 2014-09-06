@@ -5,7 +5,7 @@ import java.awt.Color;
 /**
  * Représente un <b>Bloc</b>
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class Bloc implements Cloneable {
     // ATTRIBUTS
