@@ -8,7 +8,7 @@ import tetris.Modele.JeuDeTetris;
 /**
  * Représente un <b>Controleur</b> des touches clavier
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class ControleurClavier extends Controleur implements KeyListener {
     // CONSTRUCTEUR
