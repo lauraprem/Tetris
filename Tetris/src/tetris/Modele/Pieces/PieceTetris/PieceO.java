@@ -8,7 +8,7 @@ import tetris.Modele.Pieces.Position;
 /**
  * Représente la <b>Piece de Tetris O</b>
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class PieceO extends PieceDeTetris {
     // CONSTRUCTEUR
