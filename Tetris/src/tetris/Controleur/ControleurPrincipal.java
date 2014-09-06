@@ -7,7 +7,7 @@ import tetris.Vue.FenetresJeu.FenetreJeu;
  * Représente le <b>Controleur Principale</b> qui permet de lancer la vue et le
  * modele
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class ControleurPrincipal extends Controleur {
 
