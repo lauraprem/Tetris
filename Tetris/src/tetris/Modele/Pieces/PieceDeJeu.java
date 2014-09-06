@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Représente une <b>Piece de jeu</b>
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class PieceDeJeu implements Cloneable {
     // ATTRIBUTS
