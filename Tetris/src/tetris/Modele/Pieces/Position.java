@@ -3,7 +3,7 @@ package tetris.Modele.Pieces;
 /**
  * Représente une <b>Position</b>
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class Position implements Cloneable {
     // ATTRIBUTS
