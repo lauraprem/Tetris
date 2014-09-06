@@ -16,7 +16,7 @@ import tetris.Modele.Score.Score;
  * représente une <b>Grille de Tetris</b>, qui étend une Grille de Jeu de
  * manière plus générale
  *
- * @author Corinne Fagno && Laura Prémillieu
+ * @author Corinne && Laura Prémillieu
  */
 public class JeuDeTetris extends Observable implements Runnable {
 
